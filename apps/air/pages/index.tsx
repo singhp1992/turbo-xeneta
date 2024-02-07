@@ -3,7 +3,7 @@ import { Chart } from "ui";
 export default function Air() {
   return (
     <div>
-      <Chart />
+      <Chart name="Air Freight" />
     </div>
   );
 }

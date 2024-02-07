@@ -1,3 +1,3 @@
 import * as React from "react";
-export * from "./Button";
-export * from "./Chart";
+export * from "./components/Button";
+export * from "./charts/Chart";
