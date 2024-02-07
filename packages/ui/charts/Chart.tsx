@@ -12,7 +12,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import fetchData from "../api/fetch";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SearchPorts } from "../components/SearchPorts";
 import { options } from "./options";
 import { PortData } from "../types";
@@ -39,6 +39,7 @@ export function Chart(props: ChartProps) {
   const { name, portUrl, appColor } = props;
   const [origin, setOrigin] = useState<string>("");
   const [destination, setDestination] = useState<string>("");
+  const { data, error, loading } = fetchData<PortData>(portUrl);
 
   const csv = `Time,Temperature
   2020-02-15 18:37:39,-8.25
@@ -72,12 +73,15 @@ export function Chart(props: ChartProps) {
 
   console.log(origin, destination, ">>>> origin and destination");
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error...</p>;
+  if (!data) return <p>No data</p>;
+
   return (
     <div className="h-screen max-w-screen-lg pt-16 mx-auto">
       <div className="flex items-center justify-between mb-4 md:mb-8">
         <SearchPorts
-          // todo: need to fix this
-          portArrays={fetchData<PortData>(portUrl)?.data}
+          portArrays={data}
           origin={origin}
           setOrigin={setOrigin}
           setDestination={setDestination}
@@ -85,12 +89,17 @@ export function Chart(props: ChartProps) {
         />
         <p className="py-1 font-semibold text-center">{name}</p>
       </div>
-      <Line options={options} data={chartData} />
+      <Line options={options} data={chartData} className="z-[-1] sticky" />
     </div>
   );
 }
 
 // next up:
-// 1. implement and api call to get the data
-// 2. pass down props from ocean and air to chart
-// 3. make the chart dynamic
+// 1. double check the port data is correct
+// 2. clean up the search ports components
+// 3. fetch the marketvalue from the api
+// 4. add the market value to the chart
+// 5. add notes
+// 6. set up testing
+// 7. deploy with vercel
+// 8. mobile view

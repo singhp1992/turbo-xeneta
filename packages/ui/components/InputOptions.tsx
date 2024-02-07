@@ -10,11 +10,12 @@ type InputProps = {
 
 export function InputOptions(props: InputProps) {
   const { data, id, setValue, value } = props;
-  const [results, setResults] = useState<any>();
+  const [inputValue, setInputValue] = useState<string>("");
+  const [results, setResults] = useState<PortData[] | null>();
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    setValue(inputValue);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setInputValue(inputValue);
     const filteredResults = data?.filter((item: PortData) =>
       item.name.toLowerCase().includes(inputValue.toLowerCase())
     );
@@ -27,17 +28,18 @@ export function InputOptions(props: InputProps) {
         id={id}
         type="text"
         className="w-full px-2 py-1 border rounded-md cursor-pointer border-neutral-200 placeholder:text-neutral-500"
-        value={value}
+        value={inputValue}
         onChange={handleInputChange}
         placeholder={`Search ${id}...`}
       />
-      <ul>
+      <ul className="z-[99] max-h-0 shadow-lg">
         {results?.map((item: any, index: any) => (
           <li
             key={index}
-            className="px-2 py-1 border-b cursor-pointer text-neutral-500 hover:bg-slate-100 border-neutral-200"
+            className="z-10 px-2 py-1 bg-white border-b cursor-pointer text-neutral-500 hover:bg-neutral-100 border-neutral-200"
             onClick={() => {
-              setValue(item.name + " (" + item.code + ")");
+              setInputValue(item.name + " (" + item.code + ")");
+              setValue(item.code);
               setResults(null);
             }}
           >
