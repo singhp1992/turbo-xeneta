@@ -15,7 +15,7 @@ import fetchData from "../api/fetch";
 import { useState } from "react";
 import { SearchPorts } from "../components/SearchPorts";
 import { options } from "./options";
-import { PortData } from "../types";
+import { PortData, RouteData } from "../types";
 
 type ChartProps = {
   name: string;
@@ -37,8 +37,11 @@ ChartJS.register(
 
 export function Chart(props: ChartProps) {
   const { name, portUrl, appColor } = props;
-  const [origin, setOrigin] = useState<string>("");
-  const [destination, setDestination] = useState<string>("");
+  // clean up
+  const [route, setRoute] = useState<RouteData>({
+    origin: { name: "", code: "" },
+    destination: { name: "", code: "" },
+  });
   const { data, error, loading } = fetchData<PortData>(portUrl);
 
   const csv = `Time,Temperature
@@ -71,7 +74,7 @@ export function Chart(props: ChartProps) {
     ],
   };
 
-  console.log(origin, destination, ">>>> origin and destination");
+  console.log(route, ">?>>>>>> here is the route");
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error...</p>;
@@ -80,13 +83,7 @@ export function Chart(props: ChartProps) {
   return (
     <div className="h-screen max-w-screen-lg pt-16 mx-auto">
       <div className="flex items-center justify-between mb-4 md:mb-8">
-        <SearchPorts
-          portArrays={data}
-          origin={origin}
-          setOrigin={setOrigin}
-          setDestination={setDestination}
-          destination={destination}
-        />
+        <SearchPorts portArrays={data} route={route} setRoute={setRoute} />
         <p className="py-1 font-semibold text-center">{name}</p>
       </div>
       <Line options={options} data={chartData} className="z-[-1] sticky" />
@@ -96,7 +93,6 @@ export function Chart(props: ChartProps) {
 
 // next up:
 // 1. double check the port data is correct
-// 2. clean up the search ports components
 // 3. fetch the marketvalue from the api
 // 4. add the market value to the chart
 // 5. add notes

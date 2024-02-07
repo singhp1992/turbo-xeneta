@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { Key, useState } from "react";
 import { PortData } from "../types";
 
 type InputProps = {
-  data: PortData[] | null | undefined;
+  data: PortData[];
   id: string;
-  setValue: (origin: string) => void;
-  value: string;
+  setValue: (origin?: any, destination?: any) => void;
+  value: PortData;
 };
 
 export function InputOptions(props: InputProps) {
@@ -28,18 +28,24 @@ export function InputOptions(props: InputProps) {
         id={id}
         type="text"
         className="w-full px-2 py-1 border rounded-md cursor-pointer border-neutral-200 placeholder:text-neutral-500"
-        value={inputValue}
+        value={value?.name ? value.name + " (" + value.code + ")" : inputValue}
         onChange={handleInputChange}
         placeholder={`Search ${id}...`}
       />
       <ul className="z-[99] max-h-0 shadow-lg">
-        {results?.map((item: any, index: any) => (
+        {results?.map((item: PortData, index: Key) => (
           <li
             key={index}
             className="z-10 px-2 py-1 bg-white border-b cursor-pointer text-neutral-500 hover:bg-neutral-100 border-neutral-200"
             onClick={() => {
               setInputValue(item.name + " (" + item.code + ")");
-              setValue(item.code);
+              setValue((prevState: PortData) => ({
+                ...prevState,
+                [id]: {
+                  name: item.name,
+                  code: item.code,
+                },
+              }));
               setResults(null);
             }}
           >

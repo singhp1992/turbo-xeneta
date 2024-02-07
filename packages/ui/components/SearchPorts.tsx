@@ -1,30 +1,47 @@
 import { InputOptions } from "./InputOptions";
-import { PortData } from "../types";
+import { PortData, RouteData } from "../types";
+import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 
 type SearchProps = {
-  portArrays: PortData[] | null | undefined;
-  origin: string;
-  setOrigin: (origin: string) => void;
-  setDestination: (destination: string) => void;
-  destination: string;
+  portArrays: PortData[];
+  route: RouteData;
+  // need to fix this
+  setRoute: (origin?: any, destination?: any) => void;
 };
 
 export function SearchPorts(props: SearchProps) {
-  const { portArrays, origin, setOrigin, setDestination, destination } = props;
+  const { portArrays, setRoute, route } = props;
+  const origin = "origin";
+  const destination = "destination";
 
   return (
-    <div className="flex">
+    <div className="flex items-center">
       <InputOptions
         data={portArrays}
-        id="origin"
-        setValue={setOrigin}
-        value={origin}
+        id={origin}
+        setValue={setRoute}
+        value={route[origin]}
       />
+      <div className="w-[24px]">
+        <ArrowsRightLeftIcon
+          color="rgb(115 115 115)"
+          height={24}
+          onClick={() => {
+            setRoute(() => {
+              return {
+                origin: route[destination],
+                destination: route[origin],
+              };
+            });
+          }}
+          className="transition-transform duration-300 ease-in-out cursor-pointer hover:transform hover:scale-110"
+        />
+      </div>
       <InputOptions
         data={portArrays}
-        id="destination"
-        setValue={setDestination}
-        value={destination}
+        id={destination}
+        setValue={setRoute}
+        value={route[destination]}
       />
     </div>
   );
