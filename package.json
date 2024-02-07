@@ -20,6 +20,11 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@faker-js/faker": "^8.4.0",
+    "@types/faker": "^6.6.9",
+    "chart.js": "^4.4.1",
+    "react-chartjs-2": "^5.2.0"
+  },
   "packageManager": "pnpm@7.18.1"
 }
