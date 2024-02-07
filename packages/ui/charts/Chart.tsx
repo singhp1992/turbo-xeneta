@@ -12,8 +12,10 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import fetchData from "../api/fetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SearchPorts } from "../components/SearchPorts";
+import { options } from "./options";
+import { PortData } from "../types";
 
 type ChartProps = {
   name: string;
@@ -37,41 +39,6 @@ export function Chart(props: ChartProps) {
   const { name, portUrl, appColor } = props;
   const [origin, setOrigin] = useState<string>("");
   const [destination, setDestination] = useState<string>("");
-
-  const options = {
-    responsive: true,
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-      },
-    },
-    plugins: {
-      legend: {
-        position: "right" as const,
-        labels: {
-          color: "black",
-          font: {
-            size: 16,
-          },
-        },
-      },
-      // title: {
-      //   display: true,
-      //   text: name,
-      //   color: "black",
-      //   font: {
-      //     size: 16,
-      //     weight: 400,
-      //   },
-      //   padding: {
-      //     top: 12,
-      //     bottom: 24,
-      //   },
-      // },
-    },
-  };
 
   const csv = `Time,Temperature
   2020-02-15 18:37:39,-8.25
@@ -103,15 +70,18 @@ export function Chart(props: ChartProps) {
     ],
   };
 
+  console.log(origin, destination, ">>>> origin and destination");
+
   return (
     <div className="h-screen max-w-screen-lg pt-16 mx-auto">
       <div className="flex items-center justify-between mb-4 md:mb-8">
         <SearchPorts
           // todo: need to fix this
-          portArrays={fetchData(portUrl)?.data}
+          portArrays={fetchData<PortData>(portUrl)?.data}
           origin={origin}
           setOrigin={setOrigin}
           setDestination={setDestination}
+          destination={destination}
         />
         <p className="py-1 font-semibold text-center">{name}</p>
       </div>
