@@ -24,7 +24,7 @@ export function InputOptions(props: InputProps) {
       <input
         id={id}
         type="text"
-        className="w-full px-2 py-1 border-b-2 cursor-pointer border-slate-300 placeholder:text-black"
+        className="w-full px-2 py-1 border rounded-md cursor-pointer border-neutral-200 placeholder:text-neutral-500"
         value={origin}
         onChange={handleInputChange}
         placeholder={`Search ${id}...`}
@@ -33,7 +33,7 @@ export function InputOptions(props: InputProps) {
         {results?.map((item: any, index: any) => (
           <li
             key={index}
-            className="p-2 border-b cursor-pointer text-slate-500 hover:bg-slate-100 border-slate-300"
+            className="px-2 py-1 border-b cursor-pointer text-neutral-500 hover:bg-slate-100 border-neutral-200"
             onClick={() => setOrigin(item.name + " (" + item.code + ")")}
           >
             {item.name} ({item.code})

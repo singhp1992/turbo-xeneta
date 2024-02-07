@@ -8,6 +8,7 @@ import {
   Tooltip,
   Filler,
   Legend,
+  TimeSeriesScale,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import fetchData from "../api/fetch";
@@ -17,6 +18,7 @@ import { SearchPorts } from "../components/SearchPorts";
 type ChartProps = {
   name: string;
   portUrl: string;
+  appColor: string;
 };
 
 ChartJS.register(
@@ -27,29 +29,47 @@ ChartJS.register(
   Title,
   Tooltip,
   Filler,
-  Legend
+  Legend,
+  TimeSeriesScale
 );
 
 export function Chart(props: ChartProps) {
-  const { name, portUrl } = props;
+  const { name, portUrl, appColor } = props;
   const [origin, setOrigin] = useState<string>("");
   const [destination, setDestination] = useState<string>("");
 
   const options = {
     responsive: true,
-    plugins: {
-      scales: {
-        x: {
-          type: "timeseries",
+    scales: {
+      x: {
+        grid: {
+          display: false,
         },
       },
+    },
+    plugins: {
       legend: {
-        position: "top" as const,
+        position: "right" as const,
+        labels: {
+          color: "black",
+          font: {
+            size: 16,
+          },
+        },
       },
-      title: {
-        display: true,
-        text: props.name,
-      },
+      // title: {
+      //   display: true,
+      //   text: name,
+      //   color: "black",
+      //   font: {
+      //     size: 16,
+      //     weight: 400,
+      //   },
+      //   padding: {
+      //     top: 12,
+      //     bottom: 24,
+      //   },
+      // },
     },
   };
 
@@ -76,23 +96,25 @@ export function Chart(props: ChartProps) {
     datasets: [
       {
         data: csvToChartData(csv),
-        label: "Temperature",
-        borderColor: "#3e95cd",
+        label: "Market High",
+        borderColor: appColor,
         fill: false,
       },
     ],
   };
 
-  const destinationArray = ["Kale", "Onions", "Broccoli", "Peas"];
-
   return (
     <div className="h-screen max-w-screen-lg pt-16 mx-auto">
-      <SearchPorts
-        portArrays={fetchData(portUrl)?.data}
-        origin={origin}
-        setOrigin={setOrigin}
-        setDestination={setDestination}
-      />
+      <div className="flex items-center justify-between mb-4 md:mb-8">
+        <SearchPorts
+          // todo: need to fix this
+          portArrays={fetchData(portUrl)?.data}
+          origin={origin}
+          setOrigin={setOrigin}
+          setDestination={setDestination}
+        />
+        <p className="py-1 font-semibold text-center">{name}</p>
+      </div>
       <Line options={options} data={chartData} />
     </div>
   );

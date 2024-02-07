@@ -4,7 +4,11 @@ export default function Air() {
 
   return (
     <div>
-      <Chart name="Market Position - Air Freight" portUrl={airPortUrl} />
+      <Chart
+        name="Market Position - Air Freight"
+        portUrl={airPortUrl}
+        appColor="#771DFF"
+      />
     </div>
   );
 }

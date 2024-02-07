@@ -6,7 +6,11 @@ export default function Ocean() {
 
   return (
     <div>
-      <Chart name="Market Position - Ocean Freight" portUrl={oceanPortUrl} />
+      <Chart
+        name="Market Position - Ocean Freight"
+        portUrl={oceanPortUrl}
+        appColor="#135DFF"
+      />
     </div>
   );
 }
