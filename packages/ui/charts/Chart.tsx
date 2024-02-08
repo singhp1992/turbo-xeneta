@@ -46,7 +46,7 @@ export function Chart(props: ChartProps) {
   const [route, setRoute] = useState<any>({});
   const [portData, setPortData] = useState<PortData[]>();
   // fix this any type
-  const [marketRate, setMarketRate] = useState<any>({});
+  const [marketRate, setMarketRate] = useState<any>([]);
 
   // initially fetching the port data
   useEffect(() => {
@@ -66,31 +66,26 @@ export function Chart(props: ChartProps) {
     // fetching the market rate only if the route is set // if it changes
   }, [route]);
 
-  const csv = `Time,Temperature
-  2020-02-15 18:37:39,-8.25
-  2020-02-15 19:07:39,-8.08
-  2020-02-15 19:37:39,-8.41
-  2020-02-15 20:07:39,-8.2`;
-
-  const csvToChartData = (csv: string) => {
-    const lines = csv.trim().split("\n");
-    lines.shift(); // remove titles (first line)
-    return lines.map((line) => {
-      const [date, temperature] = line.split(",");
-      return {
-        x: date,
-        y: temperature,
-      };
-    });
-  };
-
   const chartData = {
     // here need to make it dynamic here
+    labels: marketRate?.map((dataPoint: any) => dataPoint.day),
     datasets: [
       {
-        data: csvToChartData(csv),
-        label: "Market High",
-        borderColor: appColor,
+        label: "High",
+        data: marketRate?.map((dataPoint: any) => dataPoint.high),
+        borderColor: "red",
+        fill: false,
+      },
+      {
+        label: "Low",
+        data: marketRate?.map((dataPoint: any) => dataPoint.low),
+        borderColor: "blue",
+        fill: false,
+      },
+      {
+        label: "Mean",
+        data: marketRate?.map((dataPoint: any) => dataPoint.mean),
+        borderColor: "green",
         fill: false,
       },
     ],
