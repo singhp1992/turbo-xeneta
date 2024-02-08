@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 import { SearchPorts } from "../components/SearchPorts";
 import { options } from "./options";
 import { PortData, RouteData } from "../types";
+import { Message } from "../components/Message";
 
 type ChartProps = {
   name: string;
@@ -93,10 +94,9 @@ export function Chart(props: ChartProps) {
 
   console.log(route, portData, marketRate, ">?>>>>>> here is the route");
 
-  // make this more robust
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error...</p>;
-  if (!portData) return <p>No data</p>;
+  if (loading) return <Message message="Loading..." />;
+  if (error) return <Message message="Error, please refresh" />;
+  if (!portData) return <Message message="No port data available" />;
 
   return (
     <div className="h-screen max-w-screen-lg pt-16 mx-auto">
@@ -115,6 +115,9 @@ export function Chart(props: ChartProps) {
 // 3. make the chart look a little neater
 // 4. make the colors more consistent
 // 4.5. on click show the market value labels
+// 0. add tool tips
+// 0.5. what to do with the env file
+// 1. FIX: after selecting the ports, you cant type in a new port option
 // 5. add notes
 // 6. set up testing
 // 7. deploy with vercel
