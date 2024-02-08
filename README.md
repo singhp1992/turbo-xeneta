@@ -1,8 +1,8 @@
-## What's inside?
+### What's inside?
 
 This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes the following packages/apps:
 
-## Apps and Packages
+### Apps and Packages
 
 - `air`: a [Next.js](https://nextjs.org/) app
 - `ocean`: another [Next.js](https://nextjs.org/) app
@@ -12,7 +12,7 @@ This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes th
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
-## Utilities
+### Utilities
 
 This turborepo has some additional tools already setup for you:
 
@@ -45,18 +45,19 @@ This turborepo has some additional tools already setup for you:
   ```
 - the apps should be running on port 3000 and 3001 unless stated differently in command line
 
-## Vercel Links
+### Vercel Links
 
-<a href="https://turbo-xeneta-ocean.vercel.app/" target="_blank" rel="noopener noreferrer">Ocean-Freight</a>
+[Ocean-Freight](https://turbo-xeneta-ocean.vercel.app/) 
 
-<a href="https://turbo-xeneta-air.vercel.app/" target="_blank" rel="noopener noreferrer">Air-Freight</a>
+[Air-Freight](https://turbo-xeneta-air.vercel.app/) 
 
-## Info
+
+### Info
 
 `/apps `: holds the `air` and `ocean` applications  <br/>
 `/packages/ui `: contains the shared components between the Ocean and Air application
 
-## Remote Caching
+### Remote Caching
 
 Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
 
@@ -75,7 +76,7 @@ Next, you can link your Turborepo to your Remote Cache by running the following 
 pnpm dlx turbo link
 ```
 
-## Useful Links
+### Useful Links
 
 Learn more about the power of Turborepo:
 
