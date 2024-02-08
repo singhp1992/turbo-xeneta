@@ -1,17 +1,31 @@
-import React, { Dispatch, Key, SetStateAction, useState } from "react";
+import React, {
+  Dispatch,
+  Key,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { PortData, RouteData } from "../types";
 
 type InputProps = {
   data: PortData[];
   id: string; // "origin" or "destination" - representing the key in the RouteData object
   setValue: Dispatch<SetStateAction<RouteData>>;
+  value: any;
 };
 
 export function InputOptions(props: InputProps) {
-  const { data, id, setValue } = props;
+  const { data, id, setValue, value } = props;
   // the input value is unique to the input field
   const [inputValue, setInputValue] = useState<string>("");
   const [results, setResults] = useState<PortData[] | null>();
+
+  // update the input value state when the value prop changes (for example if origin/destination have been switched)
+  useEffect(() => {
+    if (value.name && value.code) {
+      setInputValue(`${value.name} (${value.code})`);
+    }
+  }, [value]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value; // get input value from event
