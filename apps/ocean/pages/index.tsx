@@ -1,8 +1,9 @@
-import { Chart } from "ui";
+import { Chart, baseUrl } from "ui";
 
 export default function Ocean() {
   // NEED TO CHANGE THIS URL
-  const oceanPortUrl = `https://685rp9jkj1.execute-api.eu-west-1.amazonaws.com/prod/ocean/ports`;
+  const oceanPortUrl = `${baseUrl}/ocean/ports`;
+  const oceanMarketRateUrl = `${baseUrl}/ocean/rates?origin=CNSGH&destination=NOOSL`;
 
   return (
     <div>

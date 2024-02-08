@@ -1,6 +1,8 @@
-import { Chart } from "ui";
+import { Chart, baseUrl } from "ui";
+
 export default function Air() {
-  const airPortUrl = `https://685rp9jkj1.execute-api.eu-west-1.amazonaws.com/prod/air/airports`;
+  const airPortUrl = `${baseUrl}/air/airports`;
+  const airMarketRateUrl = `${baseUrl}/air/rates?origin=SHA&destination=JFK`;
 
   return (
     <div>
