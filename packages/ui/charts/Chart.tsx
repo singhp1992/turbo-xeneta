@@ -17,6 +17,7 @@ import { SearchPorts } from "../components/SearchPorts";
 import { options, chartDataSet } from "./options";
 import { PortData, RouteData, MarketRate } from "../types";
 import { Message } from "../components/Message";
+import { checkAllNull } from "../utils/sharedUtils";
 
 type ChartProps = {
   name: string;
@@ -75,6 +76,12 @@ export function Chart(props: ChartProps) {
   }, [route]);
 
   console.log(route, portData, marketRate, ">?>>>>>> here is the route");
+
+  const keysToCheck = ["mean", "low", "high"];
+
+  if (marketRate.length > 0) {
+    checkAllNull(marketRate, keysToCheck);
+  }
 
   if (loading) return <Message message="Loading..." />;
   if (error) return <Message message="Error, please refresh" />;

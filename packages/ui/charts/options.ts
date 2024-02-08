@@ -1,5 +1,5 @@
 import { MarketRate } from "../types";
-import { months } from "../constants";
+import { months } from "../utils/constants";
 
 // options specific for the time series line chart
 export const options = {
@@ -8,6 +8,36 @@ export const options = {
     x: {
       grid: {
         display: false,
+      },
+      title: {
+        display: true,
+        text: "Date",
+        font: {
+          size: 14,
+          weight: 600,
+        },
+        padding: {
+          top: 8,
+        },
+      },
+    },
+    y: {
+      title: {
+        display: true,
+        text: "Amount (Dollars)",
+        font: {
+          size: 14,
+          weight: 600,
+        },
+        padding: {
+          bottom: 24,
+        },
+      },
+      ticks: {
+        callback: function (value: string | number) {
+          return "$" + value; // Add a dollar sign to the y-axis labels
+        },
+        // stepSize: 1000,
       },
     },
   },
@@ -40,9 +70,9 @@ export const chartDataSet = (marketRate: MarketRate[]) => {
       {
         label: "Market High",
         data: marketRate?.map((dataPoint: any) => dataPoint.high),
-        borderColor: "green",
+        borderColor: "red",
         fill: false,
-        hidden: true,
+        hidden: false,
       },
       {
         label: "Market Mean",
@@ -54,9 +84,9 @@ export const chartDataSet = (marketRate: MarketRate[]) => {
       {
         label: "Market Low",
         data: marketRate?.map((dataPoint: any) => dataPoint.low),
-        borderColor: "purple",
+        borderColor: "green",
         fill: false,
-        hidden: true,
+        hidden: false,
       },
     ],
   };
