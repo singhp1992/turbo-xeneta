@@ -117,8 +117,10 @@ export function Chart(props: ChartProps) {
 }
 
 // next up:
-// 0.5. what to do with the env file
+// 1. deploy with vercel
+// 2. scroll down option on the port dropdown
+// 3. make it so that the user cannot select the same port for origin and destination
+// 4. fix the fonts Poppins,sans-serif
+
 // 6. set up testing
-// 7. deploy with vercel
 // 8. mobile view
-// fix: overlay on top when selecting ports
