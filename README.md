@@ -1,9 +1,6 @@
 ### What's inside?
 
 This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes the following packages/apps:
-
-### Apps and Packages
-
 - `air`: a [Next.js](https://nextjs.org/) app
 - `ocean`: another [Next.js](https://nextjs.org/) app
 - `ui`: a stub React component library shared by both `web` and `ocean` applications
@@ -50,7 +47,6 @@ This turborepo has some additional tools already setup for you:
 [Ocean-Freight](https://turbo-xeneta-ocean.vercel.app/) 
 
 [Air-Freight](https://turbo-xeneta-air.vercel.app/) 
-
 
 ### Info
 
