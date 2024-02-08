@@ -1,4 +1,5 @@
-export const baseUrl = `https://685rp9jkj1.execute-api.eu-west-1.amazonaws.com/prod`;
+export const baseUrl =
+  `https://685rp9jkj1.execute-api.eu-west-1.amazonaws.com/prod` as const;
 
 export const months: string[] = [
   "Jan",
@@ -14,3 +15,5 @@ export const months: string[] = [
   "Nov",
   "Dec",
 ];
+
+export const keysToCheck = ["mean", "low", "high"];

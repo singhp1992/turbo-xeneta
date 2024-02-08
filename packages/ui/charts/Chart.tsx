@@ -18,6 +18,7 @@ import { options, chartDataSet } from "./options";
 import { PortData, RouteData, MarketRate } from "../types";
 import { Message } from "../components/Message";
 import { checkAllNull } from "../utils/sharedUtils";
+import { keysToCheck } from "../utils/constants";
 
 type ChartProps = {
   name: string;
@@ -55,7 +56,9 @@ export function Chart(props: ChartProps) {
     },
   });
   const [portData, setPortData] = useState<PortData[]>();
+  // need to add a market rate type
   const [marketRate, setMarketRate] = useState<any>([]);
+  const [nullMessage, setNullMessage] = useState<string>("");
 
   // initially fetching the port data
   useEffect(() => {
@@ -79,10 +82,8 @@ export function Chart(props: ChartProps) {
 
   // checking if any of the market rates are null
   useEffect(() => {
-    let keysToCheck = ["mean", "low", "high"];
-
     if (marketRate.length > 0) {
-      checkAllNull(marketRate, keysToCheck);
+      setNullMessage(checkAllNull(marketRate, keysToCheck));
     }
   }, [marketRate]);
 
@@ -105,7 +106,7 @@ export function Chart(props: ChartProps) {
         </div>
         <div className="mx-auto max-w-screen-lg mt-16 h-[450px] border border-neutral-200 rounded-lg shadow-md p-8 bg-white">
           <Line
-            options={options}
+            options={options(nullMessage)}
             data={chartDataSet(marketRate)}
             className="cursor-pointer"
           />

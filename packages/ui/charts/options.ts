@@ -2,57 +2,70 @@ import { MarketRate } from "../types";
 import { months } from "../utils/constants";
 
 // options specific for the time series line chart
-export const options = {
-  maintainAspectRatio: false,
-  responsive: true,
-  scales: {
-    x: {
-      grid: {
-        display: false,
-      },
-      title: {
-        display: true,
-        text: "Date",
-        font: {
-          size: 14,
-          weight: 600,
+export const options = (nullMessage: string) => {
+  return {
+    maintainAspectRatio: false,
+    responsive: true,
+    scales: {
+      x: {
+        grid: {
+          display: false,
         },
-        padding: {
-          top: 8,
+        title: {
+          display: true,
+          text: "Date",
+          font: {
+            size: 14,
+            weight: 600,
+          },
+          padding: {
+            top: 8,
+          },
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: "Amount (Dollars)",
+          font: {
+            size: 14,
+            weight: 600,
+          },
+          padding: {
+            bottom: 24,
+          },
+        },
+        ticks: {
+          callback: function (value: string | number) {
+            return "$" + value; // Add a dollar sign to the y-axis labels
+          },
+          // stepSize: 1000,
         },
       },
     },
-    y: {
+    plugins: {
+      // I only show the title to indicate that their are null values
       title: {
         display: true,
-        text: "Amount (Dollars)",
+        text: nullMessage, // Title text
         font: {
-          size: 14,
-          weight: 600,
+          size: 20,
         },
         padding: {
           bottom: 24,
         },
       },
-      ticks: {
-        callback: function (value: string | number) {
-          return "$" + value; // Add a dollar sign to the y-axis labels
-        },
-        // stepSize: 1000,
-      },
-    },
-  },
-  plugins: {
-    legend: {
-      position: "right" as const,
-      labels: {
-        color: "black",
-        font: {
-          size: 14,
+      legend: {
+        position: "right" as const,
+        labels: {
+          color: "black",
+          font: {
+            size: 14,
+          },
         },
       },
     },
-  },
+  };
 };
 
 // formating the date so it's slightly more user friendly
