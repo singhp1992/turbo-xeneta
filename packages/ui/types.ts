@@ -4,14 +4,8 @@ export type PortData = {
 };
 
 export type RouteData = {
-  origin: {
-    code: string;
-    name: string;
-  };
-  destination: {
-    code: string;
-    name: string;
-  };
+  origin: PortData;
+  destination: PortData;
 };
 
 export type MarketRate = {

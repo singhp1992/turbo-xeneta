@@ -44,7 +44,16 @@ export function Chart(props: ChartProps) {
   const [loading, setLoading] = useState<boolean>(true);
   // specific states for the chart
   // fix this any type
-  const [route, setRoute] = useState<any>([]);
+  const [route, setRoute] = useState<RouteData>({
+    origin: {
+      code: "",
+      name: "",
+    },
+    destination: {
+      code: "",
+      name: "",
+    },
+  });
   const [portData, setPortData] = useState<PortData[]>();
   // fix this any type
   const [marketRate, setMarketRate] = useState<MarketRate[]>([]);

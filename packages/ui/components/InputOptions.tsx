@@ -1,15 +1,16 @@
-import React, { Key, useState } from "react";
-import { PortData } from "../types";
+import React, { Dispatch, Key, SetStateAction, useState } from "react";
+import { PortData, RouteData } from "../types";
 
 type InputProps = {
   data: PortData[];
   id: string;
-  setValue: (origin?: any, destination?: any) => void;
+  setValue: Dispatch<SetStateAction<RouteData>>;
   value: PortData;
 };
 
 export function InputOptions(props: InputProps) {
   const { data, id, setValue, value } = props;
+  // the input value is unique to the input field
   const [inputValue, setInputValue] = useState<string>("");
   const [results, setResults] = useState<PortData[] | null>();
 
@@ -39,7 +40,7 @@ export function InputOptions(props: InputProps) {
             className="z-10 px-2 py-1 bg-white border-b cursor-pointer text-neutral-500 hover:bg-neutral-100 border-neutral-200"
             onClick={() => {
               setInputValue(item.name + " (" + item.code + ")");
-              setValue((prevState: PortData) => ({
+              setValue((prevState: RouteData) => ({
                 ...prevState,
                 [id]: {
                   name: item.name,
