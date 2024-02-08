@@ -2,7 +2,7 @@
 
 This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes the following packages/apps:
 
-### Apps and Packages
+## Apps and Packages
 
 - `air`: a [Next.js](https://nextjs.org/) app
 - `ocean`: another [Next.js](https://nextjs.org/) app
@@ -12,7 +12,7 @@ This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes th
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
-### Utilities
+## Utilities
 
 This turborepo has some additional tools already setup for you:
 
@@ -20,23 +20,43 @@ This turborepo has some additional tools already setup for you:
 - [ESLint](https://eslint.org/) for code linting
 - [Prettier](https://prettier.io) for code formatting
 
-### Set up
+## Set up
 
-Open file in vscode or equivalent
+- Open file in vscode or equivalent
+- Navigate into the turbo-xeneta file
+  
+  ```
+  cd turbo-xeneta
+  ```
 
-```
-cd turbo-xeneta
-pnpm i
-pnpm run build
-pnpm run dev
-```
+- Create a .env file
 
-### Info
+  ```
+  touch . env 
+  ```
 
-`/apps `: holds the `air` and `ocean` applications
+- Copy the variable from .env.example and paste into the new .env file
+- The value of the variable should have been sent via 1password link, be sure to paste it in the .env file
+- In the root folder, run the following commands
+  ```
+  pnpm i
+  pnpm run build
+  pnpm run dev
+  ```
+- the apps should be running on port 3000 and 3001 unless stated differently in command line
+
+## Vercel Links
+
+[Ocean-Freight](https://turbo-xeneta-ocean.vercel.app/)
+
+[Air-Freight](https://turbo-xeneta-air.vercel.app/)
+
+## Info
+
+`/apps `: holds the `air` and `ocean` applications  <br/>
 `/packages/ui `: contains the shared components between the Ocean and Air application
 
-### Remote Caching
+## Remote Caching
 
 Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
 
