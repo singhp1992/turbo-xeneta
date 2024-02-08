@@ -8,11 +8,12 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev --parallel",
+    "dev": "dotenv -- turbo dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "@types/node": "^17.0.12",
     "eslint-config-custom": "workspace:*",
     "prettier": "latest",
     "turbo": "latest"
@@ -23,6 +24,7 @@
   "dependencies": {
     "@heroicons/react": "^2.1.1",
     "chart.js": "^4.4.1",
+    "dotenv-cli": "^7.3.0",
     "react-chartjs-2": "^5.2.0"
   },
   "packageManager": "pnpm@7.18.1"

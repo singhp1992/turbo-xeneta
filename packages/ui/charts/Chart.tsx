@@ -76,6 +76,7 @@ export function Chart(props: ChartProps) {
 
   console.log(route, ">?>>>>>> here is the route");
 
+  // make this more robust
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error...</p>;
   if (!data) return <p>No data</p>;

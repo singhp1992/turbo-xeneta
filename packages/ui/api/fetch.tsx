@@ -5,14 +5,13 @@ export default function fetchData<T>(url: string) {
   const [data, setData] = useState<T[] | null>();
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const apiKey = "DY3Hn5Bky0aTL3mbm4mfn7yYpuMPlZbC6facl2lS";
 
   useEffect(() => {
     async function fetchData() {
       try {
         const res = await fetch(url, {
           headers: {
-            "x-api-key": apiKey,
+            "x-api-key": `${process.env.NEXT_PUBLIC_API_KEY}`,
           },
         });
         const data = await res.json();
