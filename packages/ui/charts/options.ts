@@ -1,4 +1,5 @@
 import { MarketRate } from "../types";
+import { months } from "../constants";
 
 // options specific for the time series line chart
 export const options = {
@@ -16,35 +17,46 @@ export const options = {
       labels: {
         color: "black",
         font: {
-          size: 16,
+          size: 14,
         },
       },
     },
   },
 };
 
+// formating the date so it's slightly more user friendly
+const formatDate = (inputDate: string): string => {
+  const [year, month, day] = inputDate.split("-");
+  const monthIndex: number = parseInt(month, 10) - 1;
+
+  return `${months[monthIndex]} ${parseInt(day, 10)} '${year.slice(-2)}`;
+};
+
 // dataset for when the market rate is available
-export const dataset = (marketRate: MarketRate[]) => {
+export const chartDataSet = (marketRate: MarketRate[]) => {
   return {
-    labels: marketRate?.map((dataPoint: any) => dataPoint.day),
+    labels: marketRate?.map((dataPoint: any) => formatDate(dataPoint.day)),
     datasets: [
       {
         label: "Market High",
         data: marketRate?.map((dataPoint: any) => dataPoint.high),
-        borderColor: "red",
+        borderColor: "green",
         fill: false,
+        hidden: true,
       },
       {
         label: "Market Mean",
         data: marketRate?.map((dataPoint: any) => dataPoint.mean),
-        borderColor: "green",
+        borderColor: "blue",
         fill: false,
+        hidden: false,
       },
       {
         label: "Market Low",
         data: marketRate?.map((dataPoint: any) => dataPoint.low),
-        borderColor: "blue",
+        borderColor: "purple",
         fill: false,
+        hidden: true,
       },
     ],
   };

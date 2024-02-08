@@ -14,7 +14,7 @@ import { Line } from "react-chartjs-2";
 import { fetchData } from "../api/fetch";
 import { useState, useEffect } from "react";
 import { SearchPorts } from "../components/SearchPorts";
-import { options, dataset } from "./options";
+import { options, chartDataSet } from "./options";
 import { PortData, RouteData, MarketRate } from "../types";
 import { Message } from "../components/Message";
 
@@ -43,7 +43,6 @@ export function Chart(props: ChartProps) {
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   // specific states for the chart
-  // fix this any type
   const [route, setRoute] = useState<RouteData>({
     origin: {
       code: "",
@@ -55,8 +54,7 @@ export function Chart(props: ChartProps) {
     },
   });
   const [portData, setPortData] = useState<PortData[]>();
-  // fix this any type
-  const [marketRate, setMarketRate] = useState<MarketRate[]>([]);
+  const [marketRate, setMarketRate] = useState<any>([]);
 
   // initially fetching the port data
   useEffect(() => {
@@ -90,8 +88,8 @@ export function Chart(props: ChartProps) {
       </div>
       <Line
         options={options}
-        data={dataset(marketRate)}
-        className="z-[-1] sticky"
+        data={chartDataSet(marketRate)}
+        className="cursor-pointer"
       />
     </div>
   );
@@ -102,11 +100,8 @@ export function Chart(props: ChartProps) {
 // 2. make sure it works for both air and ocean
 // 3. make the chart look a little neater
 // 4. make the colors more consistent
-// 4.5. on click show the market value labels
-// 0. add tool tips
 // 0.5. what to do with the env file
-// 1. FIX: after selecting the ports, you cant type in a new port option
-// 5. add notes
 // 6. set up testing
 // 7. deploy with vercel
 // 8. mobile view
+// fix: overlay on top when selecting ports
