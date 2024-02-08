@@ -1,31 +1,28 @@
-import { useState, useEffect } from "react";
-
-// COMMENT: using generic T for reusability
-export default function fetchData<T>(url: string) {
-  const [data, setData] = useState<T[] | null>();
-  const [error, setError] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch(url, {
-          headers: {
-            "x-api-key": `${process.env.NEXT_PUBLIC_API_KEY}`,
-          },
-        });
-        const data = await res.json();
-
-        setData(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Database Error:", error);
-        setLoading(false);
-        setError(true);
-      }
-    }
-    fetchData();
-  }, []);
-
-  return { data, error, loading };
+interface ApiResponse<T> {
+  data: T[] | null;
+  error: boolean;
+  loading: boolean;
 }
+
+// clean this up
+export const fetchData = async (
+  url: string,
+  setState: (data: any) => void,
+  setLoading: (loading: boolean) => void,
+  setError: (error: boolean) => void
+) => {
+  try {
+    const res = await fetch(url, {
+      headers: {
+        "x-api-key": `${process.env.NEXT_PUBLIC_API_KEY}`,
+      },
+    });
+    const data = await res.json();
+    setState(data);
+    setLoading(false);
+  } catch (error) {
+    console.error("Database Error:", error);
+    setLoading(false);
+    setError(true);
+  }
+};
