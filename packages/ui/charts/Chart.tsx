@@ -15,7 +15,7 @@ import { fetchData } from "../api/fetch";
 import { useState, useEffect } from "react";
 import { SearchPorts } from "../components/SearchPorts";
 import { options } from "./options";
-import { PortData, RouteData } from "../types";
+import { PortData, RouteData, MarketRate } from "../types";
 import { Message } from "../components/Message";
 
 type ChartProps = {
@@ -44,10 +44,10 @@ export function Chart(props: ChartProps) {
   const [loading, setLoading] = useState<boolean>(true);
   // specific states for the chart
   // fix this any type
-  const [route, setRoute] = useState<any>({});
+  const [route, setRoute] = useState<any>([]);
   const [portData, setPortData] = useState<PortData[]>();
   // fix this any type
-  const [marketRate, setMarketRate] = useState<any>([]);
+  const [marketRate, setMarketRate] = useState<MarketRate[]>([]);
 
   // initially fetching the port data
   useEffect(() => {
@@ -68,25 +68,24 @@ export function Chart(props: ChartProps) {
   }, [route]);
 
   const chartData = {
-    // here need to make it dynamic here
     labels: marketRate?.map((dataPoint: any) => dataPoint.day),
     datasets: [
       {
-        label: "High",
+        label: "Market High",
         data: marketRate?.map((dataPoint: any) => dataPoint.high),
         borderColor: "red",
         fill: false,
       },
       {
-        label: "Low",
-        data: marketRate?.map((dataPoint: any) => dataPoint.low),
-        borderColor: "blue",
+        label: "Market Mean",
+        data: marketRate?.map((dataPoint: any) => dataPoint.mean),
+        borderColor: "green",
         fill: false,
       },
       {
-        label: "Mean",
-        data: marketRate?.map((dataPoint: any) => dataPoint.mean),
-        borderColor: "green",
+        label: "Market Low",
+        data: marketRate?.map((dataPoint: any) => dataPoint.low),
+        borderColor: "blue",
         fill: false,
       },
     ],
