@@ -4,13 +4,15 @@ import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { Dispatch, SetStateAction } from "react";
 
 type SearchProps = {
-  portArrays: PortData[];
-  route: RouteData;
-  setRoute: Dispatch<SetStateAction<RouteData>>;
+  portArrays: PortData[]; // PortData array of objects representing available ports
+  route: RouteData; // this is the current route data object containing origin and destination
+  setRoute: Dispatch<SetStateAction<RouteData>>; // fcn to update the route state
 };
 
 export function SearchPorts(props: SearchProps) {
+  // defining the props
   const { portArrays, setRoute, route } = props;
+  // Constants representing the key in the RouteData object
   const origin = "origin";
   const destination = "destination";
 
@@ -23,6 +25,7 @@ export function SearchPorts(props: SearchProps) {
           color="rgb(115 115 115)"
           height={24}
           onClick={() => {
+            //  fcn to switch origin and destination and update the route state
             setRoute(() => {
               return {
                 origin: route[destination],

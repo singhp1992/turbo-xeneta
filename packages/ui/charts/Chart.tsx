@@ -14,7 +14,7 @@ import { Line } from "react-chartjs-2";
 import { fetchData } from "../api/fetch";
 import { useState, useEffect } from "react";
 import { SearchPorts } from "../components/SearchPorts";
-import { options } from "./options";
+import { options, dataset } from "./options";
 import { PortData, RouteData, MarketRate } from "../types";
 import { Message } from "../components/Message";
 
@@ -76,30 +76,6 @@ export function Chart(props: ChartProps) {
     // fetching the market rate only if the route is set // if it changes
   }, [route]);
 
-  const chartData = {
-    labels: marketRate?.map((dataPoint: any) => dataPoint.day),
-    datasets: [
-      {
-        label: "Market High",
-        data: marketRate?.map((dataPoint: any) => dataPoint.high),
-        borderColor: "red",
-        fill: false,
-      },
-      {
-        label: "Market Mean",
-        data: marketRate?.map((dataPoint: any) => dataPoint.mean),
-        borderColor: "green",
-        fill: false,
-      },
-      {
-        label: "Market Low",
-        data: marketRate?.map((dataPoint: any) => dataPoint.low),
-        borderColor: "blue",
-        fill: false,
-      },
-    ],
-  };
-
   console.log(route, portData, marketRate, ">?>>>>>> here is the route");
 
   if (loading) return <Message message="Loading..." />;
@@ -112,7 +88,11 @@ export function Chart(props: ChartProps) {
         <SearchPorts portArrays={portData} route={route} setRoute={setRoute} />
         <p className="py-1 font-semibold text-center">{name}</p>
       </div>
-      <Line options={options} data={chartData} className="z-[-1] sticky" />
+      <Line
+        options={options}
+        data={dataset(marketRate)}
+        className="z-[-1] sticky"
+      />
     </div>
   );
 }

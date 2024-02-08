@@ -3,7 +3,7 @@ import { PortData, RouteData } from "../types";
 
 type InputProps = {
   data: PortData[];
-  id: string;
+  id: string; // "origin" or "destination" - representing the key in the RouteData object
   setValue: Dispatch<SetStateAction<RouteData>>;
 };
 
@@ -14,16 +14,20 @@ export function InputOptions(props: InputProps) {
   const [results, setResults] = useState<PortData[] | null>();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setInputValue(inputValue);
+    const inputValue = e.target.value; // get input value from event
+    setInputValue(inputValue); // update input value state
+
+    // filter available results based on input value
     const filteredResults = data?.filter((item: PortData) =>
       item.name.toLowerCase().includes(inputValue.toLowerCase())
     );
-    setResults(filteredResults);
+    setResults(filteredResults); // update results state
   };
 
+  // handle the click event on the available results
   const handleOptionClick = (selectedValue: PortData) => {
-    setInputValue(`${selectedValue.name} (${selectedValue.code})`);
+    setInputValue(`${selectedValue.name} (${selectedValue.code})`); // update input value state
+    // update the route state based on the selected value - using the id to identify the key in the RouteData object
     setValue((prevState: RouteData) => ({
       ...prevState,
       [id]: {
@@ -31,7 +35,7 @@ export function InputOptions(props: InputProps) {
         code: selectedValue.code,
       },
     }));
-    setResults([]);
+    setResults([]); // clear the results
   };
 
   return (
@@ -44,6 +48,7 @@ export function InputOptions(props: InputProps) {
         onChange={handleInputChange}
         placeholder={`Search ${id}...`}
       />
+      {/* display the available results to choose from */}
       <ul className="z-[99] h-0 shadow-lg">
         {results?.map((item: PortData, index: Key) => (
           <li
