@@ -5,11 +5,10 @@ type InputProps = {
   data: PortData[];
   id: string;
   setValue: Dispatch<SetStateAction<RouteData>>;
-  value: PortData;
 };
 
 export function InputOptions(props: InputProps) {
-  const { data, id, setValue, value } = props;
+  const { data, id, setValue } = props;
   // the input value is unique to the input field
   const [inputValue, setInputValue] = useState<string>("");
   const [results, setResults] = useState<PortData[] | null>();
@@ -23,32 +22,34 @@ export function InputOptions(props: InputProps) {
     setResults(filteredResults);
   };
 
+  const handleOptionClick = (selectedValue: PortData) => {
+    setInputValue(`${selectedValue.name} (${selectedValue.code})`);
+    setValue((prevState: RouteData) => ({
+      ...prevState,
+      [id]: {
+        name: selectedValue.name,
+        code: selectedValue.code,
+      },
+    }));
+    setResults([]);
+  };
+
   return (
     <div className="mx-4">
       <input
         id={id}
         type="text"
         className="w-full px-2 py-1 border rounded-md cursor-pointer border-neutral-200 placeholder:text-neutral-500"
-        value={value?.name ? value.name + " (" + value.code + ")" : inputValue}
+        value={inputValue}
         onChange={handleInputChange}
         placeholder={`Search ${id}...`}
       />
-      <ul className="z-[99] max-h-0 shadow-lg">
+      <ul className="z-[99] h-0 shadow-lg">
         {results?.map((item: PortData, index: Key) => (
           <li
             key={index}
             className="z-10 px-2 py-1 bg-white border-b cursor-pointer text-neutral-500 hover:bg-neutral-100 border-neutral-200"
-            onClick={() => {
-              setInputValue(item.name + " (" + item.code + ")");
-              setValue((prevState: RouteData) => ({
-                ...prevState,
-                [id]: {
-                  name: item.name,
-                  code: item.code,
-                },
-              }));
-              setResults(null);
-            }}
+            onClick={() => handleOptionClick(item)}
           >
             {item.name} ({item.code})
           </li>
