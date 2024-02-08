@@ -110,8 +110,11 @@ export function Chart(props: ChartProps) {
 }
 
 // next up:
-// 1. double check the port data is correct
-// 4. add the market value to the chart
+// 1. check multiple sources for the data
+// 2. make sure it works for both air and ocean
+// 3. make the chart look a little neater
+// 4. make the colors more consistent
+// 4.5. on click show the market value labels
 // 5. add notes
 // 6. set up testing
 // 7. deploy with vercel
