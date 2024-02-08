@@ -47,9 +47,9 @@ This turborepo has some additional tools already setup for you:
 
 ## Vercel Links
 
-[Ocean-Freight](https://turbo-xeneta-ocean.vercel.app/)
+<a href="https://turbo-xeneta-ocean.vercel.app/" target="_blank" rel="noopener noreferrer">Ocean-Freight</a>
 
-[Air-Freight](https://turbo-xeneta-air.vercel.app/)
+<a href="https://turbo-xeneta-air.vercel.app/" target="_blank" rel="noopener noreferrer">Air-Freight</a>
 
 ## Info
 
