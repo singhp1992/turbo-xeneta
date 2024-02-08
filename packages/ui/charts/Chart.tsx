@@ -75,38 +75,47 @@ export function Chart(props: ChartProps) {
     // fetching the market rate only if the route is set // if it changes
   }, [route]);
 
-  console.log(route, portData, marketRate, ">?>>>>>> here is the route");
+  console.log(route, portData, marketRate, name, "checking data");
 
-  const keysToCheck = ["mean", "low", "high"];
+  // checking if any of the market rates are null
+  useEffect(() => {
+    let keysToCheck = ["mean", "low", "high"];
 
-  if (marketRate.length > 0) {
-    checkAllNull(marketRate, keysToCheck);
-  }
+    if (marketRate.length > 0) {
+      checkAllNull(marketRate, keysToCheck);
+    }
+  }, [marketRate]);
 
   if (loading) return <Message message="Loading..." />;
   if (error) return <Message message="Error, please refresh" />;
   if (!portData) return <Message message="No port data available" />;
 
   return (
-    <div className="h-screen max-w-screen-lg pt-16 mx-auto">
-      <div className="flex items-center justify-between mb-4 md:mb-8">
-        <SearchPorts portArrays={portData} route={route} setRoute={setRoute} />
-        <p className="py-1 font-semibold text-center">{name}</p>
+    <div className="bg-neutral-100">
+      <div className="h-screen mx-auto">
+        <div className={`shadow-sm`} style={{ backgroundColor: appColor }}>
+          <div className="flex items-center justify-between max-w-screen-xl py-6 mx-auto">
+            <p className="py-1 text-xl text-center text-white">{name}</p>
+            <SearchPorts
+              portArrays={portData}
+              route={route}
+              setRoute={setRoute}
+            />
+          </div>
+        </div>
+        <div className="mx-auto max-w-screen-lg mt-16 h-[450px] border border-neutral-200 rounded-lg shadow-md p-8 bg-white">
+          <Line
+            options={options}
+            data={chartDataSet(marketRate)}
+            className="cursor-pointer"
+          />
+        </div>
       </div>
-      <Line
-        options={options}
-        data={chartDataSet(marketRate)}
-        className="cursor-pointer"
-      />
     </div>
   );
 }
 
 // next up:
-// 1. check multiple sources for the data
-// 2. make sure it works for both air and ocean
-// 3. make the chart look a little neater
-// 4. make the colors more consistent
 // 0.5. what to do with the env file
 // 6. set up testing
 // 7. deploy with vercel

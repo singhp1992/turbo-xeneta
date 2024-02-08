@@ -27,7 +27,8 @@ export function SearchPorts(props: SearchProps) {
       {/* this allows the user to switch the origin and destination */}
       <div className="w-[24px]">
         <ArrowsRightLeftIcon
-          color="rgb(115 115 115)"
+          // color="rgb(115 115 115)"
+          color="white"
           height={24}
           onClick={() => {
             //  fcn to switch origin and destination and update the route state

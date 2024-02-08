@@ -3,6 +3,7 @@ import { months } from "../utils/constants";
 
 // options specific for the time series line chart
 export const options = {
+  maintainAspectRatio: false,
   responsive: true,
   scales: {
     x: {

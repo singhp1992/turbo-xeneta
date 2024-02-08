@@ -67,7 +67,7 @@ export function InputOptions(props: InputProps) {
         {results?.map((item: PortData, index: Key) => (
           <li
             key={index}
-            className="z-10 px-2 py-1 bg-white border-b cursor-pointer text-neutral-500 hover:bg-neutral-100 border-neutral-200"
+            className="z-10 px-2 py-1 bg-white border-b cursor-pointer text-neutral-500 border-neutral-200"
             onClick={() => handleOptionClick(item)}
           >
             {item.name} ({item.code})
