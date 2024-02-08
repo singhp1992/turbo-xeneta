@@ -1,5 +1,5 @@
-import { MarketRate } from "../utils/types";
-import { months } from "../utils/constants";
+import { MarketRate } from "./types";
+import { months } from "./constants";
 
 // options specific for the time series line chart
 export const options = (nullMessage: string) => {

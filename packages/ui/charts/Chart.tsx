@@ -14,7 +14,7 @@ import { Line } from "react-chartjs-2";
 import { fetchData } from "../api/fetch";
 import { useState, useEffect } from "react";
 import { SearchPorts } from "../components/SearchPorts";
-import { options, chartDataSet } from "./options";
+import { options, chartDataSet } from "../utils/options";
 import { PortData, RouteData, MarketRate } from "../utils/types";
 import { Message } from "../components/Message";
 import { checkAllNull } from "../utils/sharedUtils";
@@ -92,7 +92,7 @@ export function Chart(props: ChartProps) {
   if (!portData) return <Message message="No port data available" />;
 
   return (
-    <div className="bg-neutral-100">
+    <div className=" bg-neutral-100">
       <div className="h-screen mx-auto">
         <div className={`shadow-sm`} style={{ backgroundColor: appColor }}>
           <div className="flex items-center justify-between max-w-screen-xl py-6 mx-auto">
