@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { PortData, RouteData } from "../types";
+import { PortData, RouteData } from "../utils/types";
 
 type InputProps = {
   data: PortData[];
@@ -57,7 +57,7 @@ export function InputOptions(props: InputProps) {
       <input
         id={id}
         type="text"
-        className="w-full px-2 py-1 border rounded-md cursor-pointer border-neutral-200 placeholder:text-neutral-500"
+        className="w-full px-2 py-1 rounded-md cursor-pointer border-neutral-200 placeholder:text-neutral-500"
         value={inputValue}
         onChange={handleInputChange}
         placeholder={`Search ${id}...`}
@@ -67,7 +67,7 @@ export function InputOptions(props: InputProps) {
         {results?.map((item: PortData, index: Key) => (
           <li
             key={index}
-            className="z-10 px-2 py-1 bg-white border-b cursor-pointer text-neutral-500 border-neutral-200"
+            className="z-10 px-2 py-1 bg-white border-b cursor-pointer border-neutral-200"
             onClick={() => handleOptionClick(item)}
           >
             {item.name} ({item.code})

@@ -15,7 +15,7 @@ import { fetchData } from "../api/fetch";
 import { useState, useEffect } from "react";
 import { SearchPorts } from "../components/SearchPorts";
 import { options, chartDataSet } from "./options";
-import { PortData, RouteData, MarketRate } from "../types";
+import { PortData, RouteData, MarketRate } from "../utils/types";
 import { Message } from "../components/Message";
 import { checkAllNull } from "../utils/sharedUtils";
 import { keysToCheck } from "../utils/constants";
@@ -57,7 +57,7 @@ export function Chart(props: ChartProps) {
   });
   const [portData, setPortData] = useState<PortData[]>();
   // need to add a market rate type
-  const [marketRate, setMarketRate] = useState<any>([]);
+  const [marketRate, setMarketRate] = useState<MarketRate[]>([]);
   const [nullMessage, setNullMessage] = useState<string>("");
 
   // initially fetching the port data
@@ -67,7 +67,7 @@ export function Chart(props: ChartProps) {
 
   // fetching the market rate only if the origin and destination are set
   useEffect(() => {
-    if (route?.origin?.code.length > 0 && route?.destination?.code.length > 0) {
+    if (route?.origin?.code!.length && route?.destination?.code!.length) {
       // finalizing the url based on which ports have been selected
       let completeMarketRateUrl = `${marketRateUrl}?origin=${route?.origin?.code}&destination=${route?.destination?.code}`;
 
@@ -78,11 +78,11 @@ export function Chart(props: ChartProps) {
     // fetching the market rate only if the route is set // if it changes
   }, [route]);
 
-  console.log(route, portData, marketRate, name, "checking data");
+  console.log(marketRate, name, "checking data");
 
   // checking if any of the market rates are null
   useEffect(() => {
-    if (marketRate.length > 0) {
+    if (marketRate!.length) {
       setNullMessage(checkAllNull(marketRate, keysToCheck));
     }
   }, [marketRate]);

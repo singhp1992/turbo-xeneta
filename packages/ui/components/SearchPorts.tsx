@@ -1,5 +1,5 @@
 import { InputOptions } from "./InputOptions";
-import { PortData, RouteData } from "../types";
+import { PortData, RouteData } from "../utils/types";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { Dispatch, SetStateAction } from "react";
 

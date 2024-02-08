@@ -1,4 +1,4 @@
-import { MarketRate } from "../types";
+import { MarketRate } from "../utils/types";
 import { months } from "../utils/constants";
 
 // options specific for the time series line chart

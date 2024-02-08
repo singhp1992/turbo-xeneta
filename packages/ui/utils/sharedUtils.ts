@@ -1,6 +1,7 @@
-// Check if every object has null values for all specified keys
+import { MarketRate } from "./types";
 
-export const checkAllNull = (objects: [], keys: string[]) => {
+// Check if every object has null values for all specified keys
+export const checkAllNull = (objects: MarketRate[], keys: string[]) => {
   const allNull = objects.every((obj) => {
     return keys.every((key) => obj[key] === null);
   });

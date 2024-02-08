@@ -9,8 +9,9 @@ export type RouteData = {
 };
 
 export type MarketRate = {
+  [x: string]: any;
   day: string;
-  mean: number;
-  low: number;
-  high: number;
+  mean: number | null;
+  low: number | null;
+  high: number | null;
 };
