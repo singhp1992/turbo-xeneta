@@ -1,4 +1,3 @@
-import { InputOptions } from "./InputOptions";
 import { PortData, RouteData } from "../utils/types";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { Dispatch, SetStateAction } from "react";
@@ -19,17 +18,12 @@ export function SearchPorts(props: SearchProps) {
 
   return (
     <div className="flex items-center">
-      {/* <InputOptions
-        data={portArrays}
-        id={origin}
-        setValue={setRoute}
-        value={route[origin]}
-      /> */}
       <AutoInput
         label={origin}
         value={route[origin]}
         data={portArrays}
         setValue={setRoute}
+        route={route}
       />
       {/* this allows the user to switch the origin and destination */}
       <div className="w-[24px]">
@@ -50,17 +44,12 @@ export function SearchPorts(props: SearchProps) {
         />
       </div>
       {/* destination input field, the ID is unique to the  */}
-      {/* <InputOptions
-        data={portArrays}
-        id={destination}
-        setValue={setRoute}
-        value={route[destination]}
-      /> */}
       <AutoInput
         label={destination}
         value={route[destination]}
         data={portArrays}
         setValue={setRoute}
+        route={route}
       />
     </div>
   );

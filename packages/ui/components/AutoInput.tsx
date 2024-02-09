@@ -1,17 +1,19 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { PortData, RouteData } from "../utils/types";
+import { removeElementFromArrayOfObjects } from "../utils/helpers";
 
 type InputProps = {
   data: PortData[];
-  label: string; // "origin" or "destination" - representing the key in the RouteData object
+  label: keyof RouteData; // "origin" or "destination" - representing the key in the RouteData object
   setValue: Dispatch<SetStateAction<RouteData>>;
   value: PortData | null;
+  route: RouteData;
 };
 
 export function AutoInput(props: InputProps) {
-  const { data, label, setValue, value } = props;
+  const { data, label, setValue, value, route } = props;
 
   const handleChange = (newValue: PortData | null) => {
     setValue((prevState: RouteData) => ({
@@ -21,6 +23,10 @@ export function AutoInput(props: InputProps) {
         : { name: "", code: "" },
     }));
   };
+
+  useEffect(() => {
+    removeElementFromArrayOfObjects(route, data, label);
+  }, [route]);
 
   return (
     <div className="mx-4">
@@ -36,7 +42,7 @@ export function AutoInput(props: InputProps) {
         value={value?.code && value?.name ? value : null}
         onChange={(_e, value) => handleChange(value)}
         size="small"
-        options={data}
+        options={removeElementFromArrayOfObjects(route, data, label)}
         getOptionLabel={(option: PortData) => `${option.name} ${option.code}`}
         isOptionEqualToValue={(option: PortData, value: PortData | null) => {
           if (!value) {
