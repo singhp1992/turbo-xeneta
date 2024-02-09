@@ -25,7 +25,7 @@ export function SearchPorts(props: SearchProps) {
         setValue={setRoute}
         value={route[origin]}
       /> */}
-      <AutoInput label={origin} />
+      <AutoInput label={origin} value={route[origin]} data={portArrays} />
       {/* this allows the user to switch the origin and destination */}
       <div className="w-[24px]">
         <ArrowsRightLeftIcon
@@ -51,7 +51,11 @@ export function SearchPorts(props: SearchProps) {
         setValue={setRoute}
         value={route[destination]}
       /> */}
-      <AutoInput label={destination} />
+      <AutoInput
+        label={destination}
+        value={route[destination]}
+        data={portArrays}
+      />
     </div>
   );
 }

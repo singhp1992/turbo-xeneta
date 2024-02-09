@@ -1,22 +1,23 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { PortData, RouteData } from "../utils/types";
 import { capitalize } from "../utils/helpers";
 
 type InputProps = {
-  data?: PortData[];
+  data: PortData[];
   label: string; // "origin" or "destination" - representing the key in the RouteData object
   setValue?: Dispatch<SetStateAction<RouteData>>;
-  value?: any;
+  value: any;
 };
 
 export function AutoInput(props: InputProps) {
   const { data, label, setValue, value } = props;
-  const options = [
-    { label: "The Godfather", id: 1 },
-    { label: "Pulp Fiction", id: 2 },
-  ];
+  // need this so that Autocomplete will display the name correctly
+  const getOptionLabel = (option: PortData) => {
+    return `${option.name} (${option.code})`;
+  };
+
   return (
     <div className="mx-4 ">
       <Autocomplete
@@ -29,11 +30,11 @@ export function AutoInput(props: InputProps) {
           fontColor: "black",
         }}
         size="small"
-        // value={{ label: "The Godfather", id: 1 }}
-        options={options}
+        options={data}
+        getOptionLabel={getOptionLabel}
         fullWidth
         renderInput={(params) => (
-          <TextField {...params} placeholder={`Search ${label} port`} />
+          <TextField {...params} placeholder={`Search ${label}`} />
         )}
       />
     </div>
