@@ -93,9 +93,9 @@ export function Chart(props: ChartProps) {
   // checking if any of the market rates are null
   useEffect(() => {
     if (marketRate!.length) {
-      setNullMessage(checkAllNull(marketRate, keysToCheck));
+      setNullMessage(checkAllNull(marketRate, keysToCheck, route));
     }
-  }, [marketRate]);
+  }, [marketRate, route]);
 
   if (loading) return <Message message="Loading..." />;
   if (error) return <Message message="Error, please refresh" />;

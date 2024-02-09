@@ -1,13 +1,17 @@
-import { MarketRate } from "./types";
+import { MarketRate, RouteData } from "./types";
 
 // Check if every object has null values for all specified keys
-export const checkAllNull = (objects: MarketRate[], keys: string[]): string => {
+export const checkAllNull = (
+  objects: MarketRate[],
+  keys: string[],
+  route: RouteData
+): string => {
   const allNull = objects.every((obj) => {
     return keys.every((key) => obj[key] === null);
   });
 
   if (allNull) {
-    return "Dataset is null - select a different origin/destination";
+    return `No dataset available between ${route.origin.name} and ${route.destination.name} `;
   } else {
     return "";
   }
