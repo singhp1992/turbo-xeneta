@@ -88,11 +88,20 @@ export function Chart(props: ChartProps) {
     // fetching the market rate only if the route is set // if it changes
   }, [route]);
 
-  console.log(route, name, "checking data");
+  console.log(
+    marketRate,
+    ">>>> here is the marketrate",
+    route,
+    ">>>> here is the route"
+  );
 
   // checking if any of the market rates are null
   useEffect(() => {
-    if (marketRate!.length) {
+    if (
+      marketRate!.length > 0 &&
+      route?.origin?.code!.length &&
+      route?.destination?.code!.length
+    ) {
       setNullMessage(checkAllNull(marketRate, keysToCheck, route));
     }
   }, [marketRate, route]);

@@ -11,9 +11,9 @@ export const checkAllNull = (
   });
 
   if (allNull) {
-    return `No dataset available between ${route.origin.name} and ${route.destination.name} `;
+    return `No dataset available between ${route.origin.name} and ${route.destination.name}`;
   } else {
-    return "";
+    return `${route.origin.name} to ${route.destination.name}`;
   }
 };
 
