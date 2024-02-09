@@ -88,7 +88,7 @@ export function Chart(props: ChartProps) {
     // fetching the market rate only if the route is set // if it changes
   }, [route]);
 
-  console.log(marketRate, name, "checking data");
+  console.log(route, name, "checking data");
 
   // checking if any of the market rates are null
   useEffect(() => {

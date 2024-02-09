@@ -1,25 +1,29 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { PortData, RouteData } from "../utils/types";
-import { capitalize } from "../utils/helpers";
 
 type InputProps = {
   data: PortData[];
   label: string; // "origin" or "destination" - representing the key in the RouteData object
-  setValue?: Dispatch<SetStateAction<RouteData>>;
-  value: any;
+  setValue: Dispatch<SetStateAction<RouteData>>;
+  value: PortData | null;
 };
 
 export function AutoInput(props: InputProps) {
   const { data, label, setValue, value } = props;
-  // need this so that Autocomplete will display the name correctly
-  const getOptionLabel = (option: PortData) => {
-    return `${option.name} (${option.code})`;
+
+  const handleChange = (newValue: PortData | null) => {
+    setValue((prevState: RouteData) => ({
+      ...prevState,
+      [label]: newValue
+        ? { name: newValue.name, code: newValue.code }
+        : { name: "", code: "" },
+    }));
   };
 
   return (
-    <div className="mx-4 ">
+    <div className="mx-4">
       <Autocomplete
         id="input-autocomplete"
         sx={{
@@ -29,9 +33,19 @@ export function AutoInput(props: InputProps) {
           border: "none",
           fontColor: "black",
         }}
+        value={value?.code && value?.name ? value : null}
+        onChange={(_e, value) => handleChange(value)}
         size="small"
         options={data}
-        getOptionLabel={getOptionLabel}
+        getOptionLabel={(option: PortData) => `${option.name} ${option.code}`}
+        isOptionEqualToValue={(option: PortData, value: PortData | null) => {
+          if (!value) {
+            return !option || (option.name === "" && option.code === ""); // If value is null, only match when option is also null or empty
+          }
+          return (
+            option && option.code === value.code && option.name === value.name
+          );
+        }}
         fullWidth
         renderInput={(params) => (
           <TextField {...params} placeholder={`Search ${label}`} />
