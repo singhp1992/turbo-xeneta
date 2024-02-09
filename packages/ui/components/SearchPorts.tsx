@@ -2,6 +2,7 @@ import { PortData, RouteData } from "../utils/types";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import { Dispatch, SetStateAction } from "react";
 import { AutoInput } from "./AutoInput";
+import { removeElementFromArrayOfObjects } from "../utils/helpers";
 
 type SearchProps = {
   portArrays: PortData[]; // PortData array of objects representing available ports
@@ -21,7 +22,7 @@ export function SearchPorts(props: SearchProps) {
       <AutoInput
         label={origin}
         value={route[origin]}
-        data={portArrays}
+        data={removeElementFromArrayOfObjects(route, portArrays, destination)}
         setValue={setRoute}
         route={route}
       />
@@ -47,7 +48,7 @@ export function SearchPorts(props: SearchProps) {
       <AutoInput
         label={destination}
         value={route[destination]}
-        data={portArrays}
+        data={removeElementFromArrayOfObjects(route, portArrays, origin)}
         setValue={setRoute}
         route={route}
       />

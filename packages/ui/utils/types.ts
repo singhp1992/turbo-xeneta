@@ -15,3 +15,7 @@ export type MarketRate = {
   low: number | null;
   high: number | null;
 };
+
+export type ObjectType = {
+  [key: string]: string;
+};

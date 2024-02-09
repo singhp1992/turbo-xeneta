@@ -1,8 +1,7 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { PortData, RouteData } from "../utils/types";
-import { removeElementFromArrayOfObjects } from "../utils/helpers";
 
 type InputProps = {
   data: PortData[];
@@ -24,10 +23,6 @@ export function AutoInput(props: InputProps) {
     }));
   };
 
-  useEffect(() => {
-    removeElementFromArrayOfObjects(route, data, label);
-  }, [route]);
-
   return (
     <div className="mx-4">
       <Autocomplete
@@ -42,7 +37,7 @@ export function AutoInput(props: InputProps) {
         value={value?.code && value?.name ? value : null}
         onChange={(_e, value) => handleChange(value)}
         size="small"
-        options={removeElementFromArrayOfObjects(route, data, label)}
+        options={data}
         getOptionLabel={(option: PortData) => `${option.name} ${option.code}`}
         isOptionEqualToValue={(option: PortData, value: PortData | null) => {
           if (!value) {

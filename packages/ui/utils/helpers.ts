@@ -1,4 +1,4 @@
-import { MarketRate, PortData, RouteData } from "./types";
+import { MarketRate, PortData, RouteData, ObjectType } from "./types";
 
 // Check if every object has null values for all specified keys
 export const checkAllNull = (
@@ -17,7 +17,7 @@ export const checkAllNull = (
   }
 };
 
-function isEqual(objA: any, objB: any): boolean {
+const isEqual = (objA: ObjectType, objB: ObjectType): boolean => {
   console.log(objA, objB, "objA, objB");
   const keysA = Object.keys(objA);
   const keysB = Object.keys(objB);
@@ -33,20 +33,12 @@ function isEqual(objA: any, objB: any): boolean {
   }
 
   return true;
-}
+};
 
 export const removeElementFromArrayOfObjects = (
   route: RouteData,
-  portArray: any,
-  label: keyof RouteData
+  portArray: PortData[],
+  removeFrom: keyof RouteData
 ): PortData[] => {
-  if (label === "origin") {
-    label = "destination";
-  } else {
-    label = "origin";
-  }
-  let returnThis = portArray.filter((obj: any) => !isEqual(obj, route[label]));
-  console.log(returnThis, ">>>>>> returnthis");
-
-  return returnThis;
+  return portArray.filter((obj: PortData) => !isEqual(obj, route[removeFrom]));
 };
