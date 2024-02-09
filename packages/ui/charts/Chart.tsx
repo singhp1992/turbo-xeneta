@@ -17,7 +17,7 @@ import { SearchPorts } from "../components/SearchPorts";
 import { options, chartDataSet } from "../utils/options";
 import { PortData, RouteData, MarketRate } from "../utils/types";
 import { Message } from "../components/Message";
-import { checkAllNull } from "../utils/sharedUtils";
+import { checkAllNull } from "../utils/helpers";
 import { keysToCheck } from "../utils/constants";
 
 type ChartProps = {
