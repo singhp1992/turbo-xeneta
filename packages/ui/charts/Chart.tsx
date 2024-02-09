@@ -62,7 +62,12 @@ export function Chart(props: ChartProps) {
 
   // initially fetching the port data
   useEffect(() => {
-    fetchData(portUrl, setPortData, setLoading, setError);
+    fetchData({
+      url: portUrl,
+      setState: setPortData,
+      setLoading: setLoading,
+      setError: setError,
+    });
   }, []);
 
   // fetching the market rate only if the origin and destination are set
@@ -73,7 +78,12 @@ export function Chart(props: ChartProps) {
 
       console.log(completeMarketRateUrl, "> completeMarketRateUrl");
 
-      fetchData(completeMarketRateUrl, setMarketRate, setLoading, setError);
+      fetchData({
+        url: completeMarketRateUrl,
+        setState: setMarketRate,
+        setLoading: setLoading,
+        setError: setError,
+      });
     }
     // fetching the market rate only if the route is set // if it changes
   }, [route]);

@@ -1,16 +1,16 @@
-interface ApiResponse<T> {
-  data: T[] | null;
-  error: boolean;
-  loading: boolean;
+interface FetchDataProps {
+  url: string;
+  setState: (data: any[]) => void;
+  setLoading: (loading: boolean) => void;
+  setError: (error: boolean) => void;
 }
 
-// clean this up
-export const fetchData = async (
-  url: string,
-  setState: (data: any) => void,
-  setLoading: (loading: boolean) => void,
-  setError: (error: boolean) => void
-) => {
+export const fetchData = async ({
+  url,
+  setState,
+  setLoading,
+  setError,
+}: FetchDataProps) => {
   try {
     const res = await fetch(url, {
       headers: {
