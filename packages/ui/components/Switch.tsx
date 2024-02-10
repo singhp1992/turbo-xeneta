@@ -12,7 +12,7 @@ type SwitchProps = {
 export const Switch = (props: SwitchProps): JSX.Element => {
   const { setRoute, route, originKey, destinationKey } = props;
   return (
-    <div className="w-[24px]">
+    <div className="w-[24px] mx-4">
       <ArrowsRightLeftIcon
         color="white"
         height={24}

@@ -4,11 +4,11 @@ import { MarketRate, PortData, RouteData, ObjectType, NullData } from "./types";
 
 // Check if every object has null values for all specified keys
 export const checkAllNull = (
-  objects: MarketRate[],
+  marketRate: MarketRate[],
   keys: string[],
   route: RouteData
 ): SetStateAction<NullData> => {
-  const allNull = objects.every((obj) => {
+  const allNull = marketRate.every((obj) => {
     return keys.every((key) => obj[key] === null);
   });
 

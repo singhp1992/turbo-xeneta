@@ -13,10 +13,12 @@ export const fetchData = async <T>(props: FetchDataProps<T>) => {
         "x-api-key": `${process.env.NEXT_PUBLIC_API_KEY}`,
       },
     });
+
     if (!res.ok) {
       throw new Error(`Failed to fetch data: ${res.statusText}`);
     }
     const data = await res.json();
+
     setState(data);
     setLoading(false);
   } catch (error) {

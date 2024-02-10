@@ -68,13 +68,12 @@ export const MarketPosition = (props: MarketPositionProps) => {
     // fetching the market rate only if the route is set // if it changes
   }, [route]);
 
-  // checking if any of the market rates are null, if so, setting a message
+  // checking if all of the market rates are null, if so, setting a message
   useEffect(() => {
-    if (
-      marketRate!.length > 0 &&
-      route?.origin?.code!.length &&
-      route?.destination?.code!.length
-    ) {
+    const originCode = route?.origin?.code?.length ?? 0;
+    const destinationCode = route?.destination?.code?.length ?? 0;
+    if (originCode && destinationCode) {
+      // only checking to see if the mean,low,high are all null (keysToCheck)
       setNullMessage(checkAllNull(marketRate, keysToCheck, route));
     }
   }, [marketRate, route]);
@@ -96,7 +95,3 @@ export const MarketPosition = (props: MarketPositionProps) => {
     </div>
   );
 };
-
-// next up:
-// 6. set up testing
-// 8. mobile view
