@@ -1,4 +1,4 @@
-import { Chart, baseUrl } from "ui";
+import { MarketPosition, baseUrl } from "ui";
 
 export default function Air() {
   const airPortUrl = `${baseUrl}/air/airports`;
@@ -6,7 +6,7 @@ export default function Air() {
 
   return (
     <div>
-      <Chart
+      <MarketPosition
         appName="Market Position - Air Freight"
         portUrl={airPortUrl}
         marketRateUrl={airMarketRateUrl}

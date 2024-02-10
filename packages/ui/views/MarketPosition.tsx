@@ -1,43 +1,18 @@
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Filler,
-  Legend,
-  TimeSeriesScale,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
 import { fetchData } from "../api/fetch";
 import { useState, useEffect } from "react";
 import { Header } from "../components/Header";
-import { options, chartDataSet } from "../utils/options";
 import { PortData, RouteData, MarketRate } from "../utils/types";
 import { Message } from "../components/Message";
 import { checkAllNull } from "../utils/helpers";
 import { keysToCheck } from "../utils/constants";
+import { LineChart } from "../charts/LineChart";
 
-type ChartProps = {
+type MarketPositionProps = {
   appName: string;
   portUrl: string;
   appColor: string;
   marketRateUrl: string;
 };
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Filler,
-  Legend,
-  TimeSeriesScale
-);
 
 const initialRouteData = (): RouteData => ({
   origin: {
@@ -50,7 +25,7 @@ const initialRouteData = (): RouteData => ({
   },
 });
 
-export const Chart = (props: ChartProps) => {
+export const MarketPosition = (props: MarketPositionProps) => {
   const { appName, portUrl, appColor, marketRateUrl } = props;
   // state for basic page layout
   const [error, setError] = useState<boolean>(false);
@@ -88,14 +63,7 @@ export const Chart = (props: ChartProps) => {
     // fetching the market rate only if the route is set // if it changes
   }, [route]);
 
-  console.log(
-    marketRate,
-    ">>>> here is the marketrate",
-    route,
-    ">>>> here is the route"
-  );
-
-  // checking if any of the market rates are null, if sso, setting a message
+  // checking if any of the market rates are null, if so, setting a message
   useEffect(() => {
     if (
       marketRate!.length > 0 &&
@@ -111,23 +79,15 @@ export const Chart = (props: ChartProps) => {
   if (!portData) return <Message message="No port data available" />;
 
   return (
-    <div className=" bg-neutral-100">
-      <div className="h-screen mx-auto">
-        <Header
-          appColor={appColor}
-          appName={appName}
-          portData={portData}
-          route={route}
-          setRoute={setRoute}
-        />
-        <div className="mx-auto max-w-screen-lg mt-16 h-[450px] border border-neutral-200 rounded-lg shadow-md p-8 bg-white">
-          <Line
-            options={options(nullMessage)}
-            data={chartDataSet(marketRate)}
-            className="cursor-pointer"
-          />
-        </div>
-      </div>
+    <div className="h-screen bg-neutral-100">
+      <Header
+        appColor={appColor}
+        appName={appName}
+        portData={portData}
+        route={route}
+        setRoute={setRoute}
+      />
+      <LineChart nullMessage={nullMessage} marketRate={marketRate} />
     </div>
   );
 };

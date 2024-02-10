@@ -1,4 +1,4 @@
-import { Chart, baseUrl } from "ui";
+import { MarketPosition, baseUrl } from "ui";
 
 export default function Ocean() {
   const oceanPortUrl = `${baseUrl}/ocean/ports`;
@@ -6,7 +6,7 @@ export default function Ocean() {
 
   return (
     <div>
-      <Chart
+      <MarketPosition
         appName="Market Position - Ocean Freight"
         portUrl={oceanPortUrl}
         marketRateUrl={oceanMarketRateUrl}
