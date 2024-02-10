@@ -51,6 +51,11 @@ export const options = (nullMessage: string) => {
       },
     },
     plugins: {
+      tooltip: {
+        padding: 12,
+        usePointStyle: true,
+        yAlign: "top" as const,
+      },
       // I only show the title to indicate that there are null values
       title: {
         display: true,
