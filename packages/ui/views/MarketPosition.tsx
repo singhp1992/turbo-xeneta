@@ -1,7 +1,7 @@
 import { fetchData } from "../api/fetch";
 import { useState, useEffect } from "react";
 import { Header } from "../components/Header";
-import { PortData, RouteData, MarketRate } from "../utils/types";
+import { PortData, RouteData, MarketRate, NullData } from "../utils/types";
 import { Message } from "../components/Message";
 import { checkAllNull } from "../utils/helpers";
 import { keysToCheck } from "../utils/constants";
@@ -25,6 +25,11 @@ const initialRouteData = (): RouteData => ({
   },
 });
 
+const initialNullData = (): NullData => ({
+  message: "",
+  isNull: false,
+});
+
 export const MarketPosition = (props: MarketPositionProps) => {
   const { appName, portUrl, appColor, marketRateUrl } = props;
   // state for basic page layout
@@ -35,7 +40,7 @@ export const MarketPosition = (props: MarketPositionProps) => {
   const [portData, setPortData] = useState<PortData[]>([]);
   // need to add a market rate type
   const [marketRate, setMarketRate] = useState<MarketRate[]>([]);
-  const [nullMessage, setNullMessage] = useState<string>("");
+  const [nullMessage, setNullMessage] = useState<NullData>(initialNullData);
 
   // initially fetching the port data
   useEffect(() => {

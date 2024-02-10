@@ -19,3 +19,8 @@ export type MarketRate = {
 export type ObjectType = {
   [key: string]: string;
 };
+
+export type NullData = {
+  message: string;
+  isNull: boolean;
+};

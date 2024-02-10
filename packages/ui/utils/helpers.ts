@@ -1,25 +1,31 @@
+import { SetStateAction } from "react";
 import { months } from "./constants";
-import { MarketRate, PortData, RouteData, ObjectType } from "./types";
+import { MarketRate, PortData, RouteData, ObjectType, NullData } from "./types";
 
 // Check if every object has null values for all specified keys
 export const checkAllNull = (
   objects: MarketRate[],
   keys: string[],
   route: RouteData
-): string => {
+): SetStateAction<NullData> => {
   const allNull = objects.every((obj) => {
     return keys.every((key) => obj[key] === null);
   });
 
   if (allNull) {
-    return `No dataset available between ${route.origin.name} and ${route.destination.name}`;
+    return {
+      isNull: true,
+      message: `No dataset available between ${route.origin.name} and ${route.destination.name}`,
+    };
   } else {
-    return `${route.origin.name} to ${route.destination.name}`;
+    return {
+      isNull: false,
+      message: `${route.origin.name} to ${route.destination.name}`,
+    };
   }
 };
 
 const isEqual = (objA: ObjectType, objB: ObjectType): boolean => {
-  console.log(objA, objB, "objA, objB");
   const keysA = Object.keys(objA);
   const keysB = Object.keys(objB);
 

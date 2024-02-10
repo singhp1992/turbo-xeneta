@@ -1,9 +1,9 @@
-import { MarketRate } from "./types";
+import { MarketRate, NullData } from "./types";
 import { formatDate } from "./helpers";
 import { colorBlindOptions } from "./constants";
 
 // options specific for the time series line chart
-export const options = (nullMessage: string) => {
+export const options = (nullMessage: NullData, marketRate: MarketRate[]) => {
   return {
     maintainAspectRatio: false,
     responsive: true,
@@ -13,11 +13,10 @@ export const options = (nullMessage: string) => {
           unit: "day",
         },
         ticks: {
+          // want to make the ticks go away if there isnt any data to show
+          // display: nullMessage.isNull ? false : true,
           autoSkip: true,
-          maxTicksLimit: 6,
-        },
-        grid: {
-          display: false,
+          maxTicksLimit: 5,
         },
         title: {
           display: true,
@@ -45,16 +44,24 @@ export const options = (nullMessage: string) => {
         },
         ticks: {
           callback: function (value: string | number) {
-            return "$" + value;
+            // only returning the y axis ticks if 1. the market rate is available and 2. the null message is false
+            if (marketRate!.length && !nullMessage.isNull) {
+              return "$" + value;
+            }
           },
         },
       },
     },
     plugins: {
+      tooltip: {
+        padding: 12,
+        usePointStyle: true,
+        yAlign: "top" as const,
+      },
       // I only show the title to indicate that there are null values
       title: {
         display: true,
-        text: nullMessage,
+        text: nullMessage.message,
         font: {
           size: 20,
         },

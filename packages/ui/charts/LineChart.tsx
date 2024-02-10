@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { options, chartDataSet } from "../utils/chartOptions";
+import { MarketRate, NullData } from "../utils/types";
 
 ChartJS.register(
   CategoryScale,
@@ -26,8 +27,8 @@ ChartJS.register(
 );
 
 type LineChartProps = {
-  nullMessage: any;
-  marketRate: any;
+  nullMessage: NullData;
+  marketRate: MarketRate[];
 };
 
 export const LineChart = (props: LineChartProps): JSX.Element => {
@@ -35,7 +36,7 @@ export const LineChart = (props: LineChartProps): JSX.Element => {
   return (
     <div className="max-w-screen-lg p-8 mx-auto mt-16 bg-white border rounded-lg shadow-md h-chart-height border-neutral-200">
       <Line
-        options={options(nullMessage)}
+        options={options(nullMessage, marketRate)}
         data={chartDataSet(marketRate)}
         className="cursor-pointer"
       />
