@@ -55,7 +55,7 @@ export function Chart(props: ChartProps) {
       name: "",
     },
   });
-  const [portData, setPortData] = useState<PortData[]>();
+  const [portData, setPortData] = useState<PortData[]>([]);
   // need to add a market rate type
   const [marketRate, setMarketRate] = useState<MarketRate[]>([]);
   const [nullMessage, setNullMessage] = useState<string>("");
@@ -76,8 +76,6 @@ export function Chart(props: ChartProps) {
       // finalizing the url based on which ports have been selected
       let completeMarketRateUrl = `${marketRateUrl}?origin=${route?.origin?.code}&destination=${route?.destination?.code}`;
 
-      console.log(completeMarketRateUrl, "> completeMarketRateUrl");
-
       fetchData({
         url: completeMarketRateUrl,
         setState: setMarketRate,
@@ -95,7 +93,7 @@ export function Chart(props: ChartProps) {
     ">>>> here is the route"
   );
 
-  // checking if any of the market rates are null
+  // checking if any of the market rates are null, if sso, setting a message
   useEffect(() => {
     if (
       marketRate!.length > 0 &&

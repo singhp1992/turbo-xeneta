@@ -80,11 +80,13 @@ const formatDate = (inputDate: string): string => {
 // dataset for when the market rate is available
 export const chartDataSet = (marketRate: MarketRate[]) => {
   return {
-    labels: marketRate?.map((dataPoint: any) => formatDate(dataPoint.day)),
+    labels: marketRate?.map((dataPoint: MarketRate) =>
+      formatDate(dataPoint.day)
+    ),
     datasets: [
       {
         label: "Market High",
-        data: marketRate?.map((dataPoint: any) => dataPoint.high),
+        data: marketRate?.map((dataPoint: MarketRate) => dataPoint.high),
         borderColor: "red",
         borderWidth: 2,
         hidden: false,
@@ -93,7 +95,7 @@ export const chartDataSet = (marketRate: MarketRate[]) => {
       },
       {
         label: "Market Mean",
-        data: marketRate?.map((dataPoint: any) => dataPoint.mean),
+        data: marketRate?.map((dataPoint: MarketRate) => dataPoint.mean),
         borderColor: "blue",
         borderWidth: 2,
         hidden: false,
@@ -102,7 +104,7 @@ export const chartDataSet = (marketRate: MarketRate[]) => {
       },
       {
         label: "Market Low",
-        data: marketRate?.map((dataPoint: any) => dataPoint.low),
+        data: marketRate?.map((dataPoint: MarketRate) => dataPoint.low),
         borderColor: "green",
         borderWidth: 2,
         hidden: false,
