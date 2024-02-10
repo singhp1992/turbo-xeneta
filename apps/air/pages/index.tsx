@@ -7,7 +7,7 @@ export default function Air() {
   return (
     <div>
       <Chart
-        name="Market Position - Air Freight"
+        appName="Market Position - Air Freight"
         portUrl={airPortUrl}
         marketRateUrl={airMarketRateUrl}
         appColor="#771DFF"

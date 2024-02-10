@@ -11,7 +11,7 @@ type InputProps = {
   route: RouteData;
 };
 
-export function AutoInput(props: InputProps) {
+export const AutoInput = (props: InputProps) => {
   const { data, label, setValue, value, route } = props;
 
   const handleChange = (newValue: PortData | null) => {
@@ -54,4 +54,4 @@ export function AutoInput(props: InputProps) {
       />
     </div>
   );
-}
+};

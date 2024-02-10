@@ -12,7 +12,7 @@ type SearchProps = {
   destinationKey: keyof RouteData; // "origin" or "destination" - representing the key in the RouteData object
 };
 
-export function SearchPorts(props: SearchProps) {
+export const SearchPorts = (props: SearchProps) => {
   // defining the props
   const { portArrays, setRoute, route, originKey, destinationKey } = props;
   const removeDestinationFromOriginData = removeElementFromArrayOfObjects(
@@ -47,4 +47,4 @@ export function SearchPorts(props: SearchProps) {
       />
     </div>
   );
-}
+};

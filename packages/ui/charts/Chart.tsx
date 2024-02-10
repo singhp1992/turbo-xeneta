@@ -13,7 +13,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { fetchData } from "../api/fetch";
 import { useState, useEffect } from "react";
-import { SearchPorts } from "../components/SearchPorts";
+import { Header } from "../components/Header";
 import { options, chartDataSet } from "../utils/options";
 import { PortData, RouteData, MarketRate } from "../utils/types";
 import { Message } from "../components/Message";
@@ -21,7 +21,7 @@ import { checkAllNull } from "../utils/helpers";
 import { keysToCheck } from "../utils/constants";
 
 type ChartProps = {
-  name: string;
+  appName: string;
   portUrl: string;
   appColor: string;
   marketRateUrl: string;
@@ -39,22 +39,24 @@ ChartJS.register(
   TimeSeriesScale
 );
 
-export function Chart(props: ChartProps) {
-  const { name, portUrl, appColor, marketRateUrl } = props;
+const initialRouteData = (): RouteData => ({
+  origin: {
+    code: "",
+    name: "",
+  },
+  destination: {
+    code: "",
+    name: "",
+  },
+});
+
+export const Chart = (props: ChartProps) => {
+  const { appName, portUrl, appColor, marketRateUrl } = props;
   // state for basic page layout
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   // specific states for the chart
-  const [route, setRoute] = useState<RouteData>({
-    origin: {
-      code: "",
-      name: "",
-    },
-    destination: {
-      code: "",
-      name: "",
-    },
-  });
+  const [route, setRoute] = useState<RouteData>(initialRouteData());
   const [portData, setPortData] = useState<PortData[]>([]);
   // need to add a market rate type
   const [marketRate, setMarketRate] = useState<MarketRate[]>([]);
@@ -111,18 +113,13 @@ export function Chart(props: ChartProps) {
   return (
     <div className=" bg-neutral-100">
       <div className="h-screen mx-auto">
-        <div className={`shadow-sm`} style={{ backgroundColor: appColor }}>
-          <div className="flex items-center justify-between max-w-screen-xl py-6 mx-auto">
-            <p className="py-1 text-xl text-center text-white">{name}</p>
-            <SearchPorts
-              portArrays={portData}
-              route={route}
-              setRoute={setRoute}
-              originKey="origin"
-              destinationKey="destination"
-            />
-          </div>
-        </div>
+        <Header
+          appColor={appColor}
+          appName={appName}
+          portData={portData}
+          route={route}
+          setRoute={setRoute}
+        />
         <div className="mx-auto max-w-screen-lg mt-16 h-[450px] border border-neutral-200 rounded-lg shadow-md p-8 bg-white">
           <Line
             options={options(nullMessage)}
@@ -133,9 +130,8 @@ export function Chart(props: ChartProps) {
       </div>
     </div>
   );
-}
+};
 
 // next up:
-// 1. check to make sure types are used everywhere
 // 6. set up testing
 // 8. mobile view
