@@ -1,5 +1,3 @@
-import { MarketRate } from "../utils/types";
-
 interface FetchDataProps<T> {
   url: string;
   setState: (data: T[]) => void;

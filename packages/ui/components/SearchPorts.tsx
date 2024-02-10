@@ -8,21 +8,26 @@ type SearchProps = {
   portArrays: PortData[]; // PortData array of objects representing available ports
   route: RouteData; // this is the current route data object containing origin and destination
   setRoute: Dispatch<SetStateAction<RouteData>>; // fcn to update the route state
+  originKey: keyof RouteData; // "origin" or "destination" - representing the key in the RouteData object
+  destinationKey: keyof RouteData; // "origin" or "destination" - representing the key in the RouteData object
 };
 
 export function SearchPorts(props: SearchProps) {
   // defining the props
-  const { portArrays, setRoute, route } = props;
+  const { portArrays, setRoute, route, originKey, destinationKey } = props;
   // Constants representing the key in the RouteData object
-  const origin = "origin";
-  const destination = "destination";
+  // const destination: keyof RouteData = "destination";
 
   return (
     <div className="flex items-center">
       <AutoInput
-        label={origin}
-        value={route[origin]}
-        data={removeElementFromArrayOfObjects(route, portArrays, destination)}
+        label={originKey}
+        value={route[originKey]}
+        data={removeElementFromArrayOfObjects(
+          route,
+          portArrays,
+          destinationKey
+        )}
         setValue={setRoute}
         route={route}
       />
@@ -36,8 +41,8 @@ export function SearchPorts(props: SearchProps) {
             //  fcn to switch origin and destination and update the route state
             setRoute(() => {
               return {
-                origin: route[destination],
-                destination: route[origin],
+                origin: route[destinationKey],
+                destination: route[originKey],
               };
             });
           }}
@@ -46,9 +51,9 @@ export function SearchPorts(props: SearchProps) {
       </div>
       {/* destination input field, the ID is unique to the  */}
       <AutoInput
-        label={destination}
-        value={route[destination]}
-        data={removeElementFromArrayOfObjects(route, portArrays, origin)}
+        label={destinationKey}
+        value={route[destinationKey]}
+        data={removeElementFromArrayOfObjects(route, portArrays, originKey)}
         setValue={setRoute}
         route={route}
       />

@@ -118,6 +118,8 @@ export function Chart(props: ChartProps) {
               portArrays={portData}
               route={route}
               setRoute={setRoute}
+              originKey="origin"
+              destinationKey="destination"
             />
           </div>
         </div>
