@@ -33,7 +33,7 @@ type LineChartProps = {
 export const LineChart = (props: LineChartProps): JSX.Element => {
   const { nullMessage, marketRate } = props;
   return (
-    <div className="mx-auto max-w-screen-lg mt-16 h-[450px] border border-neutral-200 rounded-lg shadow-md p-8 bg-white">
+    <div className="max-w-screen-lg p-8 mx-auto mt-16 bg-white border rounded-lg shadow-md h-chart-height border-neutral-200">
       <Line
         options={options(nullMessage)}
         data={chartDataSet(marketRate)}

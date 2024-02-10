@@ -1,5 +1,6 @@
 import { MarketRate } from "./types";
-import { months } from "./constants";
+import { formatDate } from "./helpers";
+import { colorBlindOptions } from "./constants";
 
 // options specific for the time series line chart
 export const options = (nullMessage: string) => {
@@ -8,6 +9,13 @@ export const options = (nullMessage: string) => {
     responsive: true,
     scales: {
       x: {
+        time: {
+          unit: "day",
+        },
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 6,
+        },
         grid: {
           display: false,
         },
@@ -37,17 +45,16 @@ export const options = (nullMessage: string) => {
         },
         ticks: {
           callback: function (value: string | number) {
-            return "$" + value; // Add a dollar sign to the y-axis labels
+            return "$" + value;
           },
-          // stepSize: 1000,
         },
       },
     },
     plugins: {
-      // I only show the title to indicate that their are null values
+      // I only show the title to indicate that there are null values
       title: {
         display: true,
-        text: nullMessage, // Title text
+        text: nullMessage,
         font: {
           size: 20,
         },
@@ -59,22 +66,14 @@ export const options = (nullMessage: string) => {
         position: "right" as const,
         labels: {
           color: "black",
+          padding: 12,
           font: {
             size: 14,
           },
-          usePointStyle: true,
         },
       },
     },
   };
-};
-
-// formating the date so it's slightly more user friendly
-const formatDate = (inputDate: string): string => {
-  const [year, month, day] = inputDate.split("-");
-  const monthIndex: number = parseInt(month, 10) - 1;
-
-  return `${months[monthIndex]} ${parseInt(day, 10)} '${year.slice(-2)}`;
 };
 
 // dataset for when the market rate is available
@@ -87,29 +86,32 @@ export const chartDataSet = (marketRate: MarketRate[]) => {
       {
         label: "Market High",
         data: marketRate?.map((dataPoint: MarketRate) => dataPoint.high),
-        borderColor: "red",
+        borderColor: colorBlindOptions.blue,
+        backgroundColor: colorBlindOptions.blue,
         borderWidth: 2,
         hidden: false,
-        pointStyle: "rect",
-        backgroundColor: "red",
+        pointStyle: "circle",
+        pointRadius: 3,
       },
       {
         label: "Market Mean",
         data: marketRate?.map((dataPoint: MarketRate) => dataPoint.mean),
-        borderColor: "blue",
+        borderColor: colorBlindOptions.orange,
+        backgroundColor: colorBlindOptions.orange,
         borderWidth: 2,
         hidden: false,
-        pointStyle: "rect",
-        backgroundColor: "blue",
+        pointStyle: "circle",
+        pointRadius: 3,
       },
       {
         label: "Market Low",
         data: marketRate?.map((dataPoint: MarketRate) => dataPoint.low),
-        borderColor: "green",
+        borderColor: colorBlindOptions.green,
+        backgroundColor: colorBlindOptions.green,
         borderWidth: 2,
         hidden: false,
-        pointStyle: "rect",
-        backgroundColor: "green",
+        pointStyle: "circle",
+        pointRadius: 3,
       },
     ],
   };

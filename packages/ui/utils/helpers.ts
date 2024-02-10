@@ -1,3 +1,4 @@
+import { months } from "./constants";
 import { MarketRate, PortData, RouteData, ObjectType } from "./types";
 
 // Check if every object has null values for all specified keys
@@ -41,4 +42,12 @@ export const removeElementFromArrayOfObjects = (
   removeFrom: keyof RouteData
 ): PortData[] => {
   return portArray.filter((obj: PortData) => !isEqual(obj, route[removeFrom]));
+};
+
+// formating the date so it's slightly more user friendly
+export const formatDate = (inputDate: string): string => {
+  const [year, month, day] = inputDate.split("-");
+  const monthIndex: number = parseInt(month, 10) - 1;
+
+  return `${months[monthIndex]} ${parseInt(day, 10)} '${year.slice(-2)}`;
 };

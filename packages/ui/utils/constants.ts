@@ -17,3 +17,9 @@ export const months: string[] = [
 ];
 
 export const keysToCheck = ["mean", "low", "high"];
+
+export const colorBlindOptions = {
+  blue: "#1f77b4",
+  orange: "#ff7f0e",
+  green: "#2ca02c",
+};

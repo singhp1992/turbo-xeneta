@@ -14,6 +14,9 @@ module.exports = {
         "air-purple": "#771DFF",
         "ocean-blue": "#135DFF",
       },
+      height: {
+        "chart-height": "32rem",
+      },
     },
   },
   plugins: [],
