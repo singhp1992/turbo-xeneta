@@ -71,7 +71,7 @@ export const MarketPosition = (props: MarketPositionProps) => {
       // only checking to see if the mean,low,high are all null (keysToCheck)
       setNullMessage(checkAllNull(marketRate, keysToCheck, route));
     }
-  }, [marketRate, route]);
+  }, [marketRate || route]);
 
   if (loading) return <Message message="Loading..." />;
   if (error) return <Message message="Error, please refresh" />;

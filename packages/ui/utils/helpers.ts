@@ -7,7 +7,7 @@ export const checkAllNull = (
   keys: string[],
   route: RouteData
 ): string => {
-  const allNull = marketRate.every((obj) => {
+  const allNull = marketRate!.every((obj) => {
     return keys.every((key) => obj[key] === null);
   });
 
