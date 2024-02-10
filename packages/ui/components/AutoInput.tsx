@@ -24,7 +24,7 @@ export const AutoInput = (props: InputProps) => {
   };
 
   return (
-    <div className="mx-4">
+    <div>
       <Autocomplete
         id="input-autocomplete"
         sx={{
