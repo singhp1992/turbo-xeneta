@@ -9,6 +9,8 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "dotenv -- turbo dev",
+    "test": "pnpm -C packages/ui test",
+    "test:watch": "pnpm -C packages/ui test:watch",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
