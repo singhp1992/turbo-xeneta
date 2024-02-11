@@ -37,7 +37,6 @@ export const SearchPorts = (props: SearchProps) => {
       />
       {/* this allows the user to switch the origin and destination */}
       <Switch {...props} />
-      {/* destination input field, the ID is unique to the  */}
       <AutoInput
         label={destinationKey}
         value={route[destinationKey]}

@@ -3,15 +3,21 @@ import { useState, useEffect } from "react";
 import { Header } from "../components/Header";
 import { PortData, RouteData, MarketRate } from "../utils/types";
 import { Message } from "../components/Message";
-import { checkAllNull } from "../utils/helpers";
+import { checkNullDatasets } from "../utils/helpers";
 import { keysToCheck } from "../utils/constants";
 import { LineChart } from "../charts/LineChart";
+import { ChartData, Point, ChartOptions } from "chart.js";
 
+// I like to keep specific prop types on the same page, but it can be moved to a types file
 type MarketPositionProps = {
   appName: string;
   portUrl: string;
   appColor: string;
   marketRateUrl: string;
+  chartOptions: (chartTitleText?: string) => ChartOptions;
+  chartDataSet: (
+    marketRate: MarketRate[]
+  ) => ChartData<"line", (number | Point | null)[], unknown>;
 };
 
 const initialRouteData = (): RouteData => ({
@@ -26,7 +32,14 @@ const initialRouteData = (): RouteData => ({
 });
 
 export const MarketPosition = (props: MarketPositionProps) => {
-  const { appName, portUrl, appColor, marketRateUrl } = props;
+  const {
+    appName,
+    portUrl,
+    appColor,
+    marketRateUrl,
+    chartOptions,
+    chartDataSet,
+  } = props;
   // state for basic page layout
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -35,7 +48,7 @@ export const MarketPosition = (props: MarketPositionProps) => {
   const [portData, setPortData] = useState<PortData[]>([]);
   // need to add a market rate type
   const [marketRate, setMarketRate] = useState<MarketRate[]>([]);
-  const [nullMessage, setNullMessage] = useState<string>("");
+  const [chartTitleText, setChartTitleText] = useState<string>("");
 
   // initially fetching the port data
   useEffect(() => {
@@ -69,7 +82,7 @@ export const MarketPosition = (props: MarketPositionProps) => {
     const destinationCode = route?.destination?.code?.length ?? 0;
     if (originCode && destinationCode) {
       // only checking to see if the mean,low,high are all null (keysToCheck)
-      setNullMessage(checkAllNull(marketRate, keysToCheck, route));
+      setChartTitleText(checkNullDatasets(marketRate, keysToCheck, route));
     }
   }, [marketRate || route]);
 
@@ -86,7 +99,14 @@ export const MarketPosition = (props: MarketPositionProps) => {
         route={route}
         setRoute={setRoute}
       />
-      <LineChart nullMessage={nullMessage} marketRate={marketRate} />
+      <div className="max-w-screen-lg p-8 mx-auto mt-16 bg-white border rounded-lg shadow-md h-chart-height border-neutral-200">
+        <LineChart
+          chartTitleText={chartTitleText}
+          marketRate={marketRate}
+          chartOptions={chartOptions}
+          chartDataSet={chartDataSet}
+        />
+      </div>
     </div>
   );
 };

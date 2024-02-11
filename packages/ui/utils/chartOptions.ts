@@ -3,7 +3,7 @@ import { formatDate } from "./helpers";
 import { colorBlindOptions } from "./constants";
 
 // options specific for the time series line chart
-export const options = (nullMessage: string) => {
+export const timeSeriesOptions = (chartTitleText?: string) => {
   return {
     maintainAspectRatio: false,
     responsive: true,
@@ -59,7 +59,7 @@ export const options = (nullMessage: string) => {
       // I only show the title to indicate that there are null values
       title: {
         display: true,
-        text: nullMessage,
+        text: chartTitleText,
         font: {
           size: 20,
         },
@@ -82,7 +82,7 @@ export const options = (nullMessage: string) => {
 };
 
 // dataset for when the market rate is available
-export const chartDataSet = (marketRate: MarketRate[]) => {
+export const timeSeriesDataSet = (marketRate: MarketRate[]) => {
   return {
     labels: marketRate?.map((dataPoint: MarketRate) =>
       formatDate(dataPoint.day)

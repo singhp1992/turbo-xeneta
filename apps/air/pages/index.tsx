@@ -1,4 +1,9 @@
-import { MarketPosition, baseUrl } from "ui";
+import {
+  MarketPosition,
+  baseUrl,
+  timeSeriesOptions,
+  timeSeriesDataSet,
+} from "ui";
 
 export default function Air() {
   const airPortUrl = `${baseUrl}/air/airports`;
@@ -11,6 +16,8 @@ export default function Air() {
         portUrl={airPortUrl}
         marketRateUrl={airMarketRateUrl}
         appColor="#771DFF"
+        chartOptions={timeSeriesOptions}
+        chartDataSet={timeSeriesDataSet}
       />
     </div>
   );

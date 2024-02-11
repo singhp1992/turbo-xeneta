@@ -9,9 +9,12 @@ import {
   Filler,
   Legend,
   TimeSeriesScale,
+  ChartData,
+  Point,
+  ChartOptions,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { options, chartDataSet } from "../utils/chartOptions";
+import { MarketRate } from "../utils/types";
 
 ChartJS.register(
   CategoryScale,
@@ -26,19 +29,21 @@ ChartJS.register(
 );
 
 type LineChartProps = {
-  nullMessage: any;
-  marketRate: any;
+  chartTitleText: string;
+  marketRate: MarketRate[];
+  chartOptions: (chartTitleText?: string) => ChartOptions;
+  chartDataSet: (
+    marketRate: MarketRate[]
+  ) => ChartData<"line", (number | Point | null)[], unknown>;
 };
 
 export const LineChart = (props: LineChartProps): JSX.Element => {
-  const { nullMessage, marketRate } = props;
+  const { chartTitleText, marketRate, chartOptions, chartDataSet } = props;
   return (
-    <div className="max-w-screen-lg p-8 mx-auto mt-16 bg-white border rounded-lg shadow-md h-chart-height border-neutral-200">
-      <Line
-        options={options(nullMessage)}
-        data={chartDataSet(marketRate)}
-        className="cursor-pointer"
-      />
-    </div>
+    <Line
+      options={chartOptions(chartTitleText)}
+      data={chartDataSet(marketRate)}
+      className="cursor-pointer"
+    />
   );
 };

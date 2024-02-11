@@ -2,3 +2,4 @@
 export * from "./views/MarketPosition";
 export * from "./api/fetch";
 export * from "./utils/constants";
+export * from "./utils/chartOptions";

@@ -2,7 +2,7 @@ import { months } from "./constants";
 import { MarketRate, PortData, RouteData, ObjectType } from "./types";
 
 // Check if every object has null values for all specified keys
-export const checkAllNull = (
+export const checkNullDatasets = (
   marketRate: MarketRate[],
   keys: string[],
   route: RouteData
@@ -35,6 +35,8 @@ const isEqual = (objA: ObjectType, objB: ObjectType): boolean => {
   return true;
 };
 
+// issue: getting an error if user inputs the same location for both the origin and the destination
+// solution: removing the location from the dropdown if it's already selected (in either the origin or the destination dropdown)
 export const removeElementFromArrayOfObjects = (
   route: RouteData,
   portArray: PortData[],

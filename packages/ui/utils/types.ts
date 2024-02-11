@@ -9,7 +9,7 @@ export type RouteData = {
 };
 
 export type MarketRate = {
-  [x: string]: any;
+  [x: string]: string | number | null;
   day: string;
   mean: number | null;
   low: number | null;
