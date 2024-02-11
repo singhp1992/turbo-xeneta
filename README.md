@@ -4,9 +4,11 @@ This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes th
 
 - `air`: a [Next.js](https://nextjs.org/) app
 - `ocean`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `ocean` applications
+- `ui`: a React component library shared by both `web` and `ocean` applications
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- `jest-config-custom`: testing utilized in the shared `ui` folder
+
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
@@ -54,6 +56,17 @@ This turborepo has some additional tools already setup for you:
 - In the root folder, run:
   ```
   pnpm run lint
+  ```
+
+### Testing
+
+- To run tests once, run:
+  ```
+  pnpm run test
+  ```
+- To start test watch mode, run:
+  ```
+  pnpm run test:watch
   ```
 
 ### Info
