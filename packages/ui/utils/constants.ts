@@ -1,6 +1,12 @@
-export const baseUrl =
-  `https://685rp9jkj1.execute-api.eu-west-1.amazonaws.com/prod` as const;
+export const baseUrl = `https://685rp9jkj1.execute-api.eu-west-1.amazonaws.com/prod`;
+// airport urls
+export const airPortUrl = `${baseUrl}/air/airports`;
+export const airMarketRateUrl = `${baseUrl}/air/rates`;
+// ocean urls
+export const oceanPortUrl = `${baseUrl}/ocean/ports`;
+export const oceanMarketRateUrl = `${baseUrl}/ocean/rates`;
 
+// months for formatting the date
 export const months: string[] = [
   "Jan",
   "Feb",

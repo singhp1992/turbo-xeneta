@@ -1,14 +1,12 @@
 import {
   MarketPosition,
-  baseUrl,
   timeSeriesOptions,
   timeSeriesDataSet,
+  oceanPortUrl,
+  oceanMarketRateUrl,
 } from "ui";
 
 export default function Ocean() {
-  const oceanPortUrl = `${baseUrl}/ocean/ports`;
-  const oceanMarketRateUrl = `${baseUrl}/ocean/rates`;
-
   return (
     <div>
       <MarketPosition

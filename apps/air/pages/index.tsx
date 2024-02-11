@@ -1,14 +1,12 @@
 import {
   MarketPosition,
-  baseUrl,
   timeSeriesOptions,
   timeSeriesDataSet,
+  airPortUrl,
+  airMarketRateUrl,
 } from "ui";
 
 export default function Air() {
-  const airPortUrl = `${baseUrl}/air/airports`;
-  const airMarketRateUrl = `${baseUrl}/air/rates`;
-
   return (
     <div>
       <MarketPosition
