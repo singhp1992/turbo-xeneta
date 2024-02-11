@@ -36,7 +36,7 @@ This turborepo has some additional tools already setup for you:
   ```
 
 - Copy the variable from .env.example and paste into the new .env file
-- The value of the variable should have been sent via 1password link, be sure to paste it in the .env file
+- The value of the variable should have been sent via 1password link or email, be sure to paste it in the .env file
 - In the root folder, run the following commands
   ```
   pnpm i
