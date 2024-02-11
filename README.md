@@ -32,7 +32,7 @@ This turborepo has some additional tools already setup for you:
 - Create a .env file
 
   ```
-  touch . env
+  touch .env
   ```
 
 - Copy the variable from .env.example and paste into the new .env file
