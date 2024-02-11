@@ -1,6 +1,7 @@
 ### What's inside?
 
 This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes the following packages/apps:
+
 - `air`: a [Next.js](https://nextjs.org/) app
 - `ocean`: another [Next.js](https://nextjs.org/) app
 - `ui`: a stub React component library shared by both `web` and `ocean` applications
@@ -21,7 +22,7 @@ This turborepo has some additional tools already setup for you:
 
 - Open file in vscode or equivalent
 - Navigate into the turbo-xeneta file
-  
+
   ```
   cd turbo-xeneta
   ```
@@ -29,7 +30,7 @@ This turborepo has some additional tools already setup for you:
 - Create a .env file
 
   ```
-  touch . env 
+  touch . env
   ```
 
 - Copy the variable from .env.example and paste into the new .env file
@@ -44,13 +45,20 @@ This turborepo has some additional tools already setup for you:
 
 ### Vercel Links
 
-[Ocean-Freight](https://turbo-xeneta-ocean.vercel.app/) 
+[Ocean-Freight](https://turbo-xeneta-ocean.vercel.app/)
 
-[Air-Freight](https://turbo-xeneta-air.vercel.app/) 
+[Air-Freight](https://turbo-xeneta-air.vercel.app/)
+
+### Linting
+
+- In the root folder, run:
+  ```
+  pnpm run lint
+  ```
 
 ### Info
 
-`/apps `: holds the `air` and `ocean` applications  <br/>
+`/apps `: holds the `air` and `ocean` applications <br/>
 `/packages/ui `: contains the shared components between the Ocean and Air application
 
 ### Remote Caching
