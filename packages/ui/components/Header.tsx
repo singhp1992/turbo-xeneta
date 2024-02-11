@@ -14,7 +14,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
   const { appColor, appName, portData, route, setRoute } = props;
   return (
     <div className={`shadow-sm`} style={{ backgroundColor: appColor }}>
-      <div className="flex items-center justify-between max-w-screen-xl py-6 mx-auto">
+      <div className="items-center py-6 mx-auto md:max-w-screen-xl md:justify-between md:flex">
         <p className="py-1 text-xl text-center text-white">{appName}</p>
         <SearchPorts
           portArrays={portData}

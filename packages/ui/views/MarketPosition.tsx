@@ -99,7 +99,7 @@ export const MarketPosition = (props: MarketPositionProps) => {
         route={route}
         setRoute={setRoute}
       />
-      <div className="max-w-screen-lg p-8 mx-auto mt-16 bg-white border rounded-lg shadow-md h-chart-height border-neutral-200">
+      <div className="p-4 mx-4 mt-16 bg-white border rounded-lg shadow-md md:mx-auto md:p-8 h-96 md:max-w-screen-lg md:h-chart-height border-neutral-200">
         <LineChart
           chartTitleText={chartTitleText}
           marketRate={marketRate}

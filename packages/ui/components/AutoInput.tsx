@@ -2,17 +2,20 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { Dispatch, SetStateAction } from "react";
 import { PortData, RouteData } from "../utils/types";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 type InputProps = {
   data: PortData[];
   label: keyof RouteData; // "origin" or "destination" - representing the key in the RouteData object
   setValue: Dispatch<SetStateAction<RouteData>>;
   value: PortData | null;
-  route: RouteData;
 };
 
 export const AutoInput = (props: InputProps) => {
-  const { data, label, setValue, value, route } = props;
+  const { data, label, setValue, value } = props;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleChange = (newValue: PortData | null) => {
     setValue((prevState: RouteData) => ({
@@ -27,8 +30,9 @@ export const AutoInput = (props: InputProps) => {
     <div>
       <Autocomplete
         id="input-autocomplete"
+        fullWidth
         sx={{
-          width: 250,
+          width: isMobile ? 150 : 200,
           backgroundColor: "white",
           borderRadius: "4px",
           border: "none",
@@ -47,7 +51,6 @@ export const AutoInput = (props: InputProps) => {
             option && option.code === value.code && option.name === value.name
           );
         }}
-        fullWidth
         renderInput={(params) => (
           <TextField {...params} placeholder={`Search ${label}`} />
         )}
