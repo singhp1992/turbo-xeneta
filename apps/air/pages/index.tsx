@@ -14,6 +14,7 @@ export default function Air() {
         portUrl={airPortUrl}
         marketRateUrl={airMarketRateUrl}
         appColor="#771DFF"
+        // passing down chart options and data in case we want to have different chart config files
         chartOptions={timeSeriesOptions}
         chartDataSet={timeSeriesDataSet}
       />

@@ -60,7 +60,7 @@ export const MarketPosition = (props: MarketPositionProps) => {
     });
   }, []);
 
-  // fetching the market rate only if the origin and destination are set
+  // fetching the market rate only if the origin and destination are set or changed
   useEffect(() => {
     if (route?.origin?.code!.length && route?.destination?.code!.length) {
       // finalizing the url based on which ports have been selected
@@ -73,7 +73,6 @@ export const MarketPosition = (props: MarketPositionProps) => {
         setError: setError,
       });
     }
-    // fetching the market rate only if the route is set // if it changes
   }, [route]);
 
   // checking if all of the market rates are null, if so, setting a message

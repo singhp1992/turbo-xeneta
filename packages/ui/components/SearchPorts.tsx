@@ -28,6 +28,7 @@ export const SearchPorts = (props: SearchProps) => {
 
   return (
     <div className="flex items-center justify-center mt-4 md:mt-0">
+      {/* for setting origin */}
       <AutoInput
         label={originKey}
         value={route[originKey]}
@@ -36,6 +37,7 @@ export const SearchPorts = (props: SearchProps) => {
       />
       {/* this allows the user to switch the origin and destination */}
       <Switch {...props} />
+      {/* for setting destination */}
       <AutoInput
         label={destinationKey}
         value={route[destinationKey]}

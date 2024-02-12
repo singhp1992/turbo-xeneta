@@ -4,7 +4,7 @@ interface FetchDataProps<T> {
   setLoading: (loading: boolean) => void;
   setError: (error: boolean) => void;
 }
-
+// reusable fetchdata function 
 export const fetchData = async <T>(props: FetchDataProps<T>) => {
   const { url, setState, setLoading, setError } = props;
   try {

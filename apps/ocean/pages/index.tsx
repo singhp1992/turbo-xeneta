@@ -14,6 +14,7 @@ export default function Ocean() {
         portUrl={oceanPortUrl}
         marketRateUrl={oceanMarketRateUrl}
         appColor="#135DFF"
+        // passing down chart options and data in case we want to have different chart config files
         chartOptions={timeSeriesOptions}
         chartDataSet={timeSeriesDataSet}
       />
