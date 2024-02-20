@@ -9,6 +9,7 @@ This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes th
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
 - `jest-config-custom`: testing utilized in the shared `ui` folder
 
+My work process: https://www.notion.so/Xeneta-Tech-Case-635c2c01128a47a6bc485dc5f9112c85?pvs=4 
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
